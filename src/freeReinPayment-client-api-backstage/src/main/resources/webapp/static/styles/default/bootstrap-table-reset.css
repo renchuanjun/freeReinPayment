@@ -1,0 +1,8 @@
+/**表格的头部*/
+.table tr th {
+    background-color: #FFF;
+}
+/**表格的分页区*/
+.fixed-table-pagination{
+    background-color: #FFF;
+}

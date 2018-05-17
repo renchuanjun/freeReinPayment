@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuqin.system.dao.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.fuqin.system.model.SysUser" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="TINYINT" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="default_home" property="defaultHome" jdbcType="VARCHAR" />
+    <result column="moblie_phone" property="mobliePhone" jdbcType="VARCHAR" />
+    <result column="tel_phone" property="telPhone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="post_title" property="postTitle" jdbcType="VARCHAR" />
+    <result column="organ_full_id" property="organFullId" jdbcType="VARCHAR" />
+    <result column="organ_id" property="organId" jdbcType="VARCHAR" />
+    <result column="identity_card_id" property="identityCardId" jdbcType="VARCHAR" />
+    <result column="card_id" property="cardId" jdbcType="VARCHAR" />
+    <result column="order_by" property="orderBy" jdbcType="TINYINT" />
+    <result column="default_langage" property="defaultLangage" jdbcType="VARCHAR" />
+    <result column="password_change_day" property="passwordChangeDay" jdbcType="INTEGER" />
+    <result column="password_last_change_date" property="passwordLastChangeDate" jdbcType="TIMESTAMP" />
+    <result column="offic_phone" property="officPhone" jdbcType="VARCHAR" />
+    <result column="office_address" property="officeAddress" jdbcType="VARCHAR" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="login_num" property="loginNum" jdbcType="TINYINT" />
+    <result column="super_user" property="superUser" jdbcType="TINYINT" />
+    <result column="fore_back_type" property="foreBackType" jdbcType="TINYINT" />
+    <result column="is_enable" property="isEnable" jdbcType="TINYINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_on" property="createOn" jdbcType="TIMESTAMP" />
+    <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_on" property="updateOn" jdbcType="TIMESTAMP" />
+    <result column="update_by_name" property="updateByName" jdbcType="VARCHAR" />
+    <result column="platform_id" property="platformId" jdbcType="VARCHAR" />
+    <result column="data_permission_id" property="dataPermissionId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap type="com.fuqin.system.model.SysUser" id="SysUserResultMap"
+             extends="BaseResultMap">
+    <result column="organ_name" property="organName" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    user_id, user_name, name, sex, password, birthday, description, default_home, moblie_phone, 
+    tel_phone, email, post_title, organ_full_id, organ_id, identity_card_id, card_id, 
+    order_by, default_langage, password_change_day, password_last_change_date, offic_phone, 
+    office_address, last_login_time, login_num, super_user, fore_back_type, is_enable, 
+    is_deleted, create_by, create_on, create_by_name, update_by, update_on, update_by_name, 
+    platform_id, data_permission_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fuqin.system.model.SysUser" >
+    insert into sys_user (user_id, user_name, name, 
+      sex, password, birthday, 
+      description, default_home, moblie_phone, 
+      tel_phone, email, post_title, 
+      organ_full_id, organ_id, identity_card_id, 
+      card_id, order_by, default_langage, 
+      password_change_day, password_last_change_date, 
+      offic_phone, office_address, last_login_time, 
+      login_num, super_user, fore_back_type, 
+      is_enable, is_deleted, create_by, 
+      create_on, create_by_name, update_by, 
+      update_on, update_by_name, platform_id, 
+      data_permission_id)
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=TINYINT}, #{password,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=VARCHAR}, #{defaultHome,jdbcType=VARCHAR}, #{mobliePhone,jdbcType=VARCHAR}, 
+      #{telPhone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{postTitle,jdbcType=VARCHAR}, 
+      #{organFullId,jdbcType=VARCHAR}, #{organId,jdbcType=VARCHAR}, #{identityCardId,jdbcType=VARCHAR}, 
+      #{cardId,jdbcType=VARCHAR}, #{orderBy,jdbcType=TINYINT}, #{defaultLangage,jdbcType=VARCHAR}, 
+      #{passwordChangeDay,jdbcType=TINYINT}, #{passwordLastChangeDate,jdbcType=TIMESTAMP}, 
+      #{officPhone,jdbcType=VARCHAR}, #{officeAddress,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{loginNum,jdbcType=TINYINT}, #{superUser,jdbcType=TINYINT}, #{foreBackType,jdbcType=TINYINT}, 
+      #{isEnable,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}, #{createBy,jdbcType=VARCHAR}, 
+      #{createOn,jdbcType=TIMESTAMP}, #{createByName,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateOn,jdbcType=TIMESTAMP}, #{updateByName,jdbcType=VARCHAR}, #{platformId,jdbcType=VARCHAR}, 
+      #{dataPermissionId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuqin.system.model.SysUser" >
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="defaultHome != null" >
+        default_home,
+      </if>
+      <if test="mobliePhone != null" >
+        moblie_phone,
+      </if>
+      <if test="telPhone != null" >
+        tel_phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="postTitle != null" >
+        post_title,
+      </if>
+      <if test="organFullId != null" >
+        organ_full_id,
+      </if>
+      <if test="organId != null" >
+        organ_id,
+      </if>
+      <if test="identityCardId != null" >
+        identity_card_id,
+      </if>
+      <if test="cardId != null" >
+        card_id,
+      </if>
+      <if test="orderBy != null" >
+        order_by,
+      </if>
+      <if test="defaultLangage != null" >
+        default_langage,
+      </if>
+      <if test="passwordChangeDay != null" >
+        password_change_day,
+      </if>
+      <if test="passwordLastChangeDate != null" >
+        password_last_change_date,
+      </if>
+      <if test="officPhone != null" >
+        offic_phone,
+      </if>
+      <if test="officeAddress != null" >
+        office_address,
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time,
+      </if>
+      <if test="loginNum != null" >
+        login_num,
+      </if>
+      <if test="superUser != null" >
+        super_user,
+      </if>
+      <if test="foreBackType != null" >
+        fore_back_type,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createOn != null" >
+        create_on,
+      </if>
+      <if test="createByName != null" >
+        create_by_name,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateOn != null" >
+        update_on,
+      </if>
+      <if test="updateByName != null" >
+        update_by_name,
+      </if>
+      <if test="platformId != null" >
+        platform_id,
+      </if>
+      <if test="dataPermissionId != null" >
+        data_permission_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultHome != null" >
+        #{defaultHome,jdbcType=VARCHAR},
+      </if>
+      <if test="mobliePhone != null" >
+        #{mobliePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="telPhone != null" >
+        #{telPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="postTitle != null" >
+        #{postTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="organFullId != null" >
+        #{organFullId,jdbcType=VARCHAR},
+      </if>
+      <if test="organId != null" >
+        #{organId,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCardId != null" >
+        #{identityCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null" >
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        #{orderBy,jdbcType=TINYINT},
+      </if>
+      <if test="defaultLangage != null" >
+        #{defaultLangage,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordChangeDay != null" >
+        #{passwordChangeDay,jdbcType=TINYINT},
+      </if>
+      <if test="passwordLastChangeDate != null" >
+        #{passwordLastChangeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="officPhone != null" >
+        #{officPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="officeAddress != null" >
+        #{officeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginNum != null" >
+        #{loginNum,jdbcType=TINYINT},
+      </if>
+      <if test="superUser != null" >
+        #{superUser,jdbcType=TINYINT},
+      </if>
+      <if test="foreBackType != null" >
+        #{foreBackType,jdbcType=TINYINT},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createOn != null" >
+        #{createOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createByName != null" >
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOn != null" >
+        #{updateOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateByName != null" >
+        #{updateByName,jdbcType=VARCHAR},
+      </if>
+      <if test="platformId != null" >
+        #{platformId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataPermissionId != null" >
+        #{dataPermissionId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuqin.system.model.SysUser" >
+    update sys_user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultHome != null" >
+        default_home = #{defaultHome,jdbcType=VARCHAR},
+      </if>
+      <if test="mobliePhone != null" >
+        moblie_phone = #{mobliePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="telPhone != null" >
+        tel_phone = #{telPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="postTitle != null" >
+        post_title = #{postTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="organFullId != null" >
+        organ_full_id = #{organFullId,jdbcType=VARCHAR},
+      </if>
+      <if test="organId != null" >
+        organ_id = #{organId,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCardId != null" >
+        identity_card_id = #{identityCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null" >
+        card_id = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        order_by = #{orderBy,jdbcType=TINYINT},
+      </if>
+      <if test="defaultLangage != null" >
+        default_langage = #{defaultLangage,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordChangeDay != null" >
+        password_change_day = #{passwordChangeDay,jdbcType=INTEGER},
+      </if>
+      <if test="passwordLastChangeDate != null" >
+        password_last_change_date = #{passwordLastChangeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="officPhone != null" >
+        offic_phone = #{officPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="officeAddress != null" >
+        office_address = #{officeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginNum != null" >
+        login_num = #{loginNum,jdbcType=TINYINT},
+      </if>
+      <if test="superUser != null" >
+        super_user = #{superUser,jdbcType=TINYINT},
+      </if>
+      <if test="foreBackType != null" >
+        fore_back_type = #{foreBackType,jdbcType=TINYINT},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createOn != null" >
+        create_on = #{createOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createByName != null" >
+        create_by_name = #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOn != null" >
+        update_on = #{updateOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateByName != null" >
+        update_by_name = #{updateByName,jdbcType=VARCHAR},
+      </if>
+      <if test="platformId != null" >
+        platform_id = #{platformId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataPermissionId != null" >
+        data_permission_id = #{dataPermissionId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuqin.system.model.SysUser" >
+    update sys_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      password = #{password,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=VARCHAR},
+      default_home = #{defaultHome,jdbcType=VARCHAR},
+      moblie_phone = #{mobliePhone,jdbcType=VARCHAR},
+      tel_phone = #{telPhone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      post_title = #{postTitle,jdbcType=VARCHAR},
+      organ_full_id = #{organFullId,jdbcType=VARCHAR},
+      organ_id = #{organId,jdbcType=VARCHAR},
+      identity_card_id = #{identityCardId,jdbcType=VARCHAR},
+      card_id = #{cardId,jdbcType=VARCHAR},
+      order_by = #{orderBy,jdbcType=TINYINT},
+      default_langage = #{defaultLangage,jdbcType=VARCHAR},
+      password_change_day = #{passwordChangeDay,jdbcType=INTEGER},
+      password_last_change_date = #{passwordLastChangeDate,jdbcType=TIMESTAMP},
+      offic_phone = #{officPhone,jdbcType=VARCHAR},
+      office_address = #{officeAddress,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      login_num = #{loginNum,jdbcType=TINYINT},
+      super_user = #{superUser,jdbcType=TINYINT},
+      fore_back_type = #{foreBackType,jdbcType=TINYINT},
+      is_enable = #{isEnable,jdbcType=TINYINT},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_on = #{createOn,jdbcType=TIMESTAMP},
+      create_by_name = #{createByName,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_on = #{updateOn,jdbcType=TIMESTAMP},
+      update_by_name = #{updateByName,jdbcType=VARCHAR},
+      platform_id = #{platformId,jdbcType=VARCHAR},
+      data_permission_id = #{dataPermissionId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+  <!--分页-->
+  <select id="selectSysUserByPage" resultMap="SysUserResultMap">
+    SELECT
+    a.user_id, a.user_name, a.name, a.create_on,a.is_enable,b.organ_name
+    FROM
+    sys_user a LEFT join sys_organ b on a.organ_id = b.organ_id
+    <where>
+      a.is_deleted = 0
+      AND
+      a.is_enable = 1
+      AND
+      a.fore_back_type = #{user.foreBackType,jdbcType=TINYINT}
+      <if test="user.organId != null and '' != user.organId " >
+        AND a.organ_id = #{user.organId,jdbcType=VARCHAR}
+      </if>
+      <if test="user.name != null and '' != user.name ">
+        AND a.name LIKE
+        CONCAT('%',#{user.name,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+    ORDER BY a.${args.sortOrderName}
+    limit #{args.pageIndex,jdbcType=INTEGER}
+    ,#{args.pageSize,jdbcType=INTEGER};
+  </select>
+
+  <select id="selectSysUserByPageCount" resultType="java.lang.Integer">
+    SELECT
+    COUNT(organ_id)
+    FROM
+    sys_user
+    <where>
+      is_deleted = 0
+      AND
+      is_enable = 1
+      AND
+      fore_back_type = #{user.foreBackType,jdbcType=TINYINT}
+      <if test="user.organId != null and '' != user.organId " >
+        AND organ_id = #{user.organId,jdbcType=VARCHAR}
+      </if>
+      <if test="user.name != null and '' != user.name ">
+        AND name LIKE
+        CONCAT('%',#{user.name,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
+
+  <select id="selectSysUser" resultMap="SysUserResultMap">
+    select a.*
+    from sys_user a
+    where a.is_deleted = 0
+    and a.is_enable=1
+    and a.fore_back_type=#{foreBackType,jdbcType=TINYINT}
+    <if test="userName != null and '' != userName " >
+      and a.user_name = #{userName,jdbcType=VARCHAR}
+    </if>
+    <if test="password != null and '' != password " >
+      and a.password = #{password,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectRoleBySysUser" resultMap="SysUserResultMap">
+    select b.role_id
+    from sys_user a,sys_user_role b
+    where a.user_id=b.user_id
+    and a.is_deleted = 0
+    and a.is_enable=1
+    and a.fore_back_type=#{foreBackType,jdbcType=TINYINT}
+    and b.is_deleted = 0
+    and b.is_enable=1
+    and b.fore_back_type=#{foreBackType,jdbcType=TINYINT}
+    and a.user_id = #{userId,jdbcType=VARCHAR}
+
+  </select>
+
+  <select id="checkUserNameOnly" resultType="java.lang.Integer">
+    select COUNT(user_id) from sys_user
+    where user_name=#{userName,jdbcType=VARCHAR}
+  </select>
+</mapper>

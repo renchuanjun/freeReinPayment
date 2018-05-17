@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <buttons>
+    <!--新建-->
+    <button id="Add" title="新建" imageName="new.png"/>
+    <!--新建-->
+    <button id="AddCC" title="新建CC" imageName="new.png"/>
+    <!--新建-->
+    <button id="AddCV" title="新建CV" imageName="new.png"/>
+    <!--删除-->
+    <button id="Delete" title="删除" imageName="delete.png"/>
+    <!--编辑-->
+    <button id="Edit" title="编辑" imageName="edit.png"/>
+    <!--保存-->
+    <button id="Save" title="保存" imageName="save.png"/>
+    <!--关闭-->
+    <button id="Close" title="关闭" imageName="close.png"/>
+    <!--导出-->
+    <button id="Export" title="导出" imageName="export.png"/>
+    <!--启用-->
+    <button id="Enable" title="启用" imageName="active.png"/>
+    <!--禁用-->
+    <button id="Disable" title="禁用" imageName="inactive.png"/>
+    <!--查询-->
+    <button id="Query" title="查询" imageName="query.png"/>
+    <!--上移-->
+    <button id="Up" title="上移" imageName="up.png"/>
+     <!--下移-->
+    <button id="Down" title="下移" imageName="down.png"/>
+    <!--重置密码-->
+    <button id="ResetPassword" title="重置密码" imageName="passwordreset.png"/>
+    <!--复制-->
+    <button id="Copy" title="复制" imageName="copy.png"/>
+    <!--合住-->
+    <button id="Accompany" title="合住" imageName="accompany.png"/>
+    <!--取消-->
+    <button id="Cannel" title="取消" imageName="cannel.png"/>
+    <!--押金/取消规则-->
+    <button id="Canneldeposit" title="押金/取消规则" imageName="canneldeposit.png"/>
+    <!--修改历史-->
+    <button id="Changes" title="修改历史" imageName="changes.png"/>
+    <!--聚会单-->
+    <button id="Party" title="聚会单" imageName="party.png"/>
+    
+    <!--邮件-->
+    <button id="Email" title="邮件" imageName="email.png"/>
+    <!--短信-->
+    <button id="Sms" title="短信" imageName="send.png"/>
+    
+    <!--打印-->
+    <button id="Print" title="打印" imageName="print.png"/>
+    <!--房价-->
+    <button id="Rates" title="房价" imageName="rates.png"/>
+    <!--刷新-->
+    <button id="Refresh" title="刷新" imageName="refresh.png"/>
+    <!--重置-->
+    <button id="Reset" title="重置" imageName="refresh.png"/>
+    <!--提醒-->
+    <button id="Remind" title="提醒" imageName="remind.png"/>
+    <!--发送-->
+    <button id="Send" title="发送" imageName="send.png"/>
+    <!--Options-->
+    <button id="Options" title="Options" imageName="print.png"/>
+    <!--Deplist-->
+    <button id="Deplist" title="Deplist" imageName="rates.png"/>
+    <!--RateInfo-->
+    <button id="RateInfo" title="价格代码详情" imageName="remind.png"/>
+    <!--LongInfo-->
+    <button id="LongInfo" title="长描述" imageName="remind.png"/>
+    <!--Scope-->
+    <button id="Scope" title="Scope" imageName="remind.png"/>
+    <!--取消规则-->
+    <button id="Cancellation" title="Cancellation" imageName="depostrule.png"/>
+    <!--在线支付-->
+    <button id="PayOnline" title="Pay Info" imageName="depostrule.png"/>
+    <!--佣金规则-->
+    <button id="Commission" title="Commission" imageName="depostrule.png"/>
+    <!--更多信息-->
+    <button id="MoreInfo" title="More Info." imageName="copy.png"/>
+    <!--OK-->
+    <button id="OK" title="OK" imageName="save.png"/>
+    <!--查看-->
+    <button id="View" title="View" imageName="query.png"/>
+    <!--修改密码-->
+    <button id="ModifyPwd" title="修改密码" imageName="edit.png"/>
+
+    <!--修改ExpEdit映射图标-->
+    <button id="ExpdiaEdit" title="ExpEdit" imageName="edit.png"/>
+  </buttons>
+
+  <references id="system" path="systemButton.xml"/>
+</root>

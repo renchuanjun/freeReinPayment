@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuqin.system.dao.SysPermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.fuqin.system.model.SysPermission" >
+    <id column="row_id" property="rowId" jdbcType="VARCHAR" />
+    <result column="permission_id" property="permissionId" jdbcType="VARCHAR" />
+    <result column="permission_parent_id" property="permissionParentId" jdbcType="VARCHAR" />
+    <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
+    <result column="order_by" property="orderBy" jdbcType="TINYINT" />
+    <result column="ptype" property="ptype" jdbcType="TINYINT" />
+    <result column="fore_back_type" property="foreBackType" jdbcType="TINYINT" />
+    <result column="is_enable" property="isEnable" jdbcType="TINYINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_on" property="createOn" jdbcType="TIMESTAMP" />
+    <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_on" property="updateOn" jdbcType="TIMESTAMP" />
+    <result column="update_by_name" property="updateByName" jdbcType="VARCHAR" />
+    <result column="platform_id" property="platformId" jdbcType="VARCHAR" />
+    <result column="data_permission_id" property="dataPermissionId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    row_id, permission_id, permission_parent_id, permission_name, order_by, ptype, fore_back_type,
+    is_enable, is_deleted, create_by, create_on, create_by_name, update_by, update_on,
+    update_by_name, platform_id, data_permission_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_permission
+    where row_id = #{rowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_permission
+    where row_id = #{rowId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fuqin.system.model.SysPermission" >
+    insert into sys_permission (row_id, permission_id, permission_parent_id,
+    permission_name, order_by, ptype,
+    fore_back_type, is_enable, is_deleted,
+    create_by, create_on, create_by_name,
+    update_by, update_on, update_by_name,
+    platform_id, data_permission_id)
+    values (#{rowId,jdbcType=VARCHAR}, #{permissionId,jdbcType=VARCHAR}, #{permissionParentId,jdbcType=VARCHAR},
+    #{permissionName,jdbcType=VARCHAR}, #{orderBy,jdbcType=TINYINT}, #{ptype,jdbcType=TINYINT},
+    #{foreBackType,jdbcType=TINYINT}, #{isEnable,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT},
+    #{createBy,jdbcType=VARCHAR}, #{createOn,jdbcType=TIMESTAMP}, #{createByName,jdbcType=VARCHAR},
+    #{updateBy,jdbcType=VARCHAR}, #{updateOn,jdbcType=TIMESTAMP}, #{updateByName,jdbcType=VARCHAR},
+    #{platformId,jdbcType=VARCHAR}, #{dataPermissionId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuqin.system.model.SysPermission" >
+    insert into sys_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        row_id,
+      </if>
+      <if test="permissionId != null" >
+        permission_id,
+      </if>
+      <if test="permissionParentId != null" >
+        permission_parent_id,
+      </if>
+      <if test="permissionName != null" >
+        permission_name,
+      </if>
+      <if test="orderBy != null" >
+        order_by,
+      </if>
+      <if test="ptype != null" >
+        ptype,
+      </if>
+      <if test="foreBackType != null" >
+        fore_back_type,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createOn != null" >
+        create_on,
+      </if>
+      <if test="createByName != null" >
+        create_by_name,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateOn != null" >
+        update_on,
+      </if>
+      <if test="updateByName != null" >
+        update_by_name,
+      </if>
+      <if test="platformId != null" >
+        platform_id,
+      </if>
+      <if test="dataPermissionId != null" >
+        data_permission_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionId != null" >
+        #{permissionId,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionParentId != null" >
+        #{permissionParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionName != null" >
+        #{permissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        #{orderBy,jdbcType=TINYINT},
+      </if>
+      <if test="ptype != null" >
+        #{ptype,jdbcType=TINYINT},
+      </if>
+      <if test="foreBackType != null" >
+        #{foreBackType,jdbcType=TINYINT},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createOn != null" >
+        #{createOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createByName != null" >
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOn != null" >
+        #{updateOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateByName != null" >
+        #{updateByName,jdbcType=VARCHAR},
+      </if>
+      <if test="platformId != null" >
+        #{platformId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataPermissionId != null" >
+        #{dataPermissionId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuqin.system.model.SysPermission" >
+    update sys_permission
+    <set >
+      <if test="permissionId != null" >
+        permission_id = #{permissionId,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionParentId != null" >
+        permission_parent_id = #{permissionParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionName != null" >
+        permission_name = #{permissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBy != null" >
+        order_by = #{orderBy,jdbcType=TINYINT},
+      </if>
+      <if test="ptype != null" >
+        ptype = #{ptype,jdbcType=TINYINT},
+      </if>
+      <if test="foreBackType != null" >
+        fore_back_type = #{foreBackType,jdbcType=TINYINT},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createOn != null" >
+        create_on = #{createOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createByName != null" >
+        create_by_name = #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOn != null" >
+        update_on = #{updateOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateByName != null" >
+        update_by_name = #{updateByName,jdbcType=VARCHAR},
+      </if>
+      <if test="platformId != null" >
+        platform_id = #{platformId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataPermissionId != null" >
+        data_permission_id = #{dataPermissionId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where row_id = #{rowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuqin.system.model.SysPermission" >
+    update sys_permission
+    set permission_id = #{permissionId,jdbcType=VARCHAR},
+      permission_parent_id = #{permissionParentId,jdbcType=VARCHAR},
+      permission_name = #{permissionName,jdbcType=VARCHAR},
+      order_by = #{orderBy,jdbcType=TINYINT},
+      ptype = #{ptype,jdbcType=TINYINT},
+      fore_back_type = #{foreBackType,jdbcType=TINYINT},
+      is_enable = #{isEnable,jdbcType=TINYINT},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_on = #{createOn,jdbcType=TIMESTAMP},
+      create_by_name = #{createByName,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_on = #{updateOn,jdbcType=TIMESTAMP},
+      update_by_name = #{updateByName,jdbcType=VARCHAR},
+      platform_id = #{platformId,jdbcType=VARCHAR},
+      data_permission_id = #{dataPermissionId,jdbcType=VARCHAR}
+    where row_id = #{rowId,jdbcType=VARCHAR}
+  </update>
+
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+  <select id="getPermissionByAll" resultMap="BaseResultMap">
+    SELECT
+     row_id, permission_id, permission_parent_id, permission_name
+     FROM sys_permission
+     WHERE is_deleted = 0
+      AND
+      is_enable = 1
+      AND fore_back_type = #{foreBackType,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectSysPermissionByOperateGroup" resultMap="BaseResultMap">
+    <foreach collection="items" index="index" item="tag" separator="union">
+      select a.* from sys_permission a, sys_permission_operategroup b
+      where a.row_id = b.row_id
+      and a.is_deleted = 0
+      and a.is_enable=1
+      and a.fore_back_type=#{foreBackType,jdbcType=TINYINT}
+      and b.is_deleted = 0
+      and b.is_enable=1
+      and b.fore_back_type=#{foreBackType,jdbcType=TINYINT}
+      and b.group_id = #{tag,jdbcType=VARCHAR}
+
+    </foreach>
+  </select>
+</mapper>

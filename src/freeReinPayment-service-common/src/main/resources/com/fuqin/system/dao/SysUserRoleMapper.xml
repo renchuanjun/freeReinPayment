@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fuqin.system.dao.SysUserRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.fuqin.system.model.SysUserRole" >
+    <id column="role_user_id" property="roleUserId" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="fore_back_type" property="foreBackType" jdbcType="TINYINT" />
+    <result column="is_enable" property="isEnable" jdbcType="TINYINT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_on" property="createOn" jdbcType="TIMESTAMP" />
+    <result column="create_by_name" property="createByName" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_on" property="updateOn" jdbcType="TIMESTAMP" />
+    <result column="update_by_name" property="updateByName" jdbcType="VARCHAR" />
+    <result column="platform_id" property="platformId" jdbcType="VARCHAR" />
+    <result column="data_permission_id" property="dataPermissionId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap type="com.fuqin.system.model.SysUserRole" id="SysUserRoleResultMap"
+             extends="BaseResultMap">
+    <result column="organ_name" property="organName" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    role_user_id, role_id, user_id, fore_back_type, is_enable, is_deleted, create_by,
+    create_on, create_by_name, update_by, update_on, update_by_name, platform_id, data_permission_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_user_role
+    where role_user_id = #{roleUserId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_user_role
+    where role_user_id = #{roleUserId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fuqin.system.model.SysUserRole" >
+    insert into sys_user_role (role_user_id, role_id, user_id,
+    fore_back_type, is_enable, is_deleted,
+    create_by, create_on, create_by_name,
+    update_by, update_on, update_by_name,
+    platform_id, data_permission_id)
+    values (#{roleUserId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+    #{foreBackType,jdbcType=TINYINT}, #{isEnable,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT},
+    #{createBy,jdbcType=VARCHAR}, #{createOn,jdbcType=TIMESTAMP}, #{createByName,jdbcType=VARCHAR},
+    #{updateBy,jdbcType=VARCHAR}, #{updateOn,jdbcType=TIMESTAMP}, #{updateByName,jdbcType=VARCHAR},
+    #{platformId,jdbcType=VARCHAR}, #{dataPermissionId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fuqin.system.model.SysUserRole" >
+    insert into sys_user_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleUserId != null" >
+        role_user_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="foreBackType != null" >
+        fore_back_type,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createOn != null" >
+        create_on,
+      </if>
+      <if test="createByName != null" >
+        create_by_name,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateOn != null" >
+        update_on,
+      </if>
+      <if test="updateByName != null" >
+        update_by_name,
+      </if>
+      <if test="platformId != null" >
+        platform_id,
+      </if>
+      <if test="dataPermissionId != null" >
+        data_permission_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleUserId != null" >
+        #{roleUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="foreBackType != null" >
+        #{foreBackType,jdbcType=TINYINT},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createOn != null" >
+        #{createOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createByName != null" >
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOn != null" >
+        #{updateOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateByName != null" >
+        #{updateByName,jdbcType=VARCHAR},
+      </if>
+      <if test="platformId != null" >
+        #{platformId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataPermissionId != null" >
+        #{dataPermissionId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fuqin.system.model.SysUserRole" >
+    update sys_user_role
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="foreBackType != null" >
+        fore_back_type = #{foreBackType,jdbcType=TINYINT},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createOn != null" >
+        create_on = #{createOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createByName != null" >
+        create_by_name = #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOn != null" >
+        update_on = #{updateOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateByName != null" >
+        update_by_name = #{updateByName,jdbcType=VARCHAR},
+      </if>
+      <if test="platformId != null" >
+        platform_id = #{platformId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataPermissionId != null" >
+        data_permission_id = #{dataPermissionId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_user_id = #{roleUserId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fuqin.system.model.SysUserRole" >
+    update sys_user_role
+    set role_id = #{roleId,jdbcType=VARCHAR},
+    user_id = #{userId,jdbcType=VARCHAR},
+    fore_back_type = #{foreBackType,jdbcType=TINYINT},
+    is_enable = #{isEnable,jdbcType=TINYINT},
+    is_deleted = #{isDeleted,jdbcType=TINYINT},
+    create_by = #{createBy,jdbcType=VARCHAR},
+    create_on = #{createOn,jdbcType=TIMESTAMP},
+    create_by_name = #{createByName,jdbcType=VARCHAR},
+    update_by = #{updateBy,jdbcType=VARCHAR},
+    update_on = #{updateOn,jdbcType=TIMESTAMP},
+    update_by_name = #{updateByName,jdbcType=VARCHAR},
+    platform_id = #{platformId,jdbcType=VARCHAR},
+    data_permission_id = #{dataPermissionId,jdbcType=VARCHAR}
+    where role_user_id = #{roleUserId,jdbcType=VARCHAR}
+  </update>
+
+  <!--~~~~~~~~~~~~~~~-->
+  <!--角色选项卡加载人员数据-->
+  <select id="selectSysUserRoleToRole" resultMap="SysUserRoleResultMap">
+SELECT c.user_id,c.user_name,c.create_on,c.role_id,c.name,d.organ_name from
+(select a.user_id,a.user_name,a.create_on,b.role_id,a.name,a.organ_id from sys_user a,sys_user_role b where a.user_id=b.user_id and b.is_deleted = 0 and b.is_enable=1 and b.fore_back_type=#{foreBackType,jdbcType=INTEGER} and b.role_id =#{roleId,jdbcType=VARCHAR})c,sys_organ d
+where c.organ_id = d.organ_id and d.is_deleted = 0 and d.is_enable=1 and d.fore_back_type=#{foreBackType,jdbcType=INTEGER}
+  </select>
+
+
+  <update id="deleteSysUserRoleToRole" parameterType="com.fuqin.system.model.SysUserRole">
+    update sys_user_role
+    <set >
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateOn != null" >
+        update_on = #{updateOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateByName != null" >
+        update_by_name = #{updateByName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where is_deleted = 0
+    AND is_enable = 1
+    AND fore_back_type = #{foreBackType,jdbcType=TINYINT}
+    AND role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

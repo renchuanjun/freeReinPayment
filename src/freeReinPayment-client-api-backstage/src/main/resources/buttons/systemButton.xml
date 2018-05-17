@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<system>
+  <!--人员管理 开始-->
+  <page key="system_user" url="" titile="人员管理" pageResourceID="98-02-00-00-00-00">
+    <group groupid="group1" title="操作">
+      <item id="system_userLook" title="查看" btnID="Look" resourceID="98-02-00-00-00-01" fixed="false"  enable="true" onClientClick=""/>
+      <item id="system_userAdd" title="新增" btnID="Add" resourceID="98-02-00-00-00-02" fixed="false"  enable="true" onClientClick="return add();"/>
+      <item id="system_userEdit" title="编辑 " btnID="Edit" resourceID="98-02-00-00-00-03" fixed="false"  enable="true" onClientClick="return edit();"/>
+      <item id="system_userDel" title="删除" btnID="Delete" resourceID="98-02-00-00-00-04" fixed="false"  enable="true"  onClientClick="return del();"/>
+    </group>
+  </page>
+  
+  <!--角色管理 开始-->
+  <page key="system_role" url="" titile="角色管理" pageResourceID="98-04-00-00-00-00">
+    <group groupid="group1" title="操作">
+      <item id="system_roleLook" title="查看" btnID="Look" resourceID="98-04-00-00-00-01" fixed="false"  enable="true" onClientClick=""/>
+      <item id="system_roleAdd" title="新增" btnID="Add" resourceID="98-04-00-00-00-02" fixed="false"  enable="true" onClientClick="return add();"/>
+      <item id="system_roleEdit" title="编辑 " btnID="Edit" resourceID="98-04-00-00-00-03" fixed="false"  enable="true" onClientClick="return edit();"/>
+      <item id="system_roleDel" title="删除" btnID="Delete" resourceID="98-04-00-00-00-04" fixed="false"  enable="true"  onClientClick="return del();"/>
+    </group>
+  </page>
+  
+  <!--组织管理 开始-->
+  <page key="system_organ" url="" titile="组织管理" pageResourceID="98-01-00-00-00-00">
+    <group groupid="group1" title="操作">
+      <item id="system_organLook" title="查看" btnID="Look" resourceID="98-01-00-00-00-01" fixed="false"  enable="true" onClientClick=""/>
+      <item id="system_organAdd" title="新增" btnID="Add" resourceID="98-01-00-00-00-02" fixed="false"  enable="true" onClientClick="return add();"/>
+      <item id="system_organEdit" title="编辑 " btnID="Edit" resourceID="98-01-00-00-00-03" fixed="false"  enable="true" onClientClick="return edit();"/>
+      <item id="system_organDel" title="删除" btnID="Delete" resourceID="98-01-00-00-00-04" fixed="false"  enable="true"  onClientClick="return del();"/>
+    </group>
+  </page>
+  
+  <!--操作组管理 开始-->
+  <page key="system_group" url="" titile="操作组管理" pageResourceID="98-03-00-00-00-00">
+    <group groupid="group1" title="操作">
+      <item id="system_groupLook" title="查看" btnID="Look" resourceID="98-03-00-00-00-01" fixed="false"  enable="true" onClientClick=""/>
+      <item id="system_groupAdd" title="新增" btnID="Add" resourceID="98-03-00-00-00-02" fixed="false"  enable="true" onClientClick="return add();"/>
+      <item id="system_groupEdit" title="编辑 " btnID="Edit" resourceID="98-03-00-00-00-03" fixed="false"  enable="true" onClientClick="return edit();"/>
+      <item id="system_groupDel" title="删除" btnID="Delete" resourceID="98-03-00-00-00-04" fixed="false"  enable="true"  onClientClick="return del();"/>
+    </group>
+  </page>
+</system>

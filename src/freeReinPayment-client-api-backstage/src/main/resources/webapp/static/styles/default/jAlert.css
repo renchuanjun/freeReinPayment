@@ -1,0 +1,133 @@
+﻿/********************************/
+/*  JAlert Style    */
+/*  Created by: yintao         */
+/*  LastModify：2010-7-7        */
+/********************************/
+#popup_container {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	min-width: 300px; /* Dialog will be no smaller than this */
+	max-width: 600px; /* Dialog will wrap after this width */
+	background: #FFF;
+/* 	border: solid 1px #999; */
+	color: #000;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	width:300px;
+}
+
+#popup_title {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1.75em;
+	color: #666;
+	background: #CCC url(../../Images/jalert/title.gif) top repeat-x;
+	border: solid 1px #FFF;
+	border-bottom: solid 1px #999;
+	cursor: default;
+	padding: 0em;
+	margin: 0em;
+}
+
+#popup_content {
+	text-align: center;
+	padding: 1em 1.75em;
+	margin: 0em;
+}
+
+#popup_content.alert {
+/* 	background-image: url(../../Images/jalert/info.gif);*/
+}
+
+#popup_content.confirm {
+/*	background-image: url(../../Images/jalert/help.gif);*/
+}
+
+#popup_content.prompt {
+/*	background-image: url(../../Images/jalert/help.gif);*/
+}
+
+#popup_panel {
+	text-align: center;
+	margin: 1em 0em 0em 1em;
+}
+
+#popup_prompt {
+	margin: .5em 0em;
+}
+.tb_btns{
+    background: #ffffff none repeat scroll 0 0;
+    border: 1px solid #0081cf;
+    color: #0081cf;
+	border-radius: 4px;
+    line-height: 30px;
+    margin: 0 10px;
+    padding: 0 20px;
+	
+}
+.tb_btns1{
+    background: #0081cf none repeat scroll 0 0;
+    border: 1px solid #0081cf;
+    color: #ffffff;
+	border-radius: 4px;
+    line-height: 30px;
+    margin: 0 10px;
+    padding: 0 20px;
+}
+/*成功  失败   样式 选择*/
+.popup_message {
+	height: 90px;
+	margin-top: 15px;
+	color: #595757;
+	font-size: 16px;
+	line-height: 30px;
+	display: block;
+}
+
+.popup_success {
+	height: 90px;
+	margin-top: 15px;
+	color: #595757;
+	font-size: 16px;
+	line-height: 30px;
+	display: block;
+}
+
+.popup_fail {
+	height: 90px;
+	margin-top: 15px;
+	color: #595757;
+	font-size: 16px;
+	line-height: 30px;
+	display: block;
+}
+
+.jalert_popup_message {
+	margin-left: 135px;
+    background: rgba(0, 0, 0, 0) url("images/mark1.png") repeat scroll 0 0;
+    display: block;
+    height: 59px;
+    margin-top: 30px;
+    width: 61px;
+}
+
+.jalert_popup_success {
+	margin-left: 135px;
+    background: rgba(0, 0, 0, 0) url("images/through.png") repeat scroll 0 0;
+    display: block;
+    height: 59px;
+    margin-top: 30px;
+    width: 61px;
+}
+
+.jalert_popup_fail {
+    background: rgba(0, 0, 0, 0) url("images/mark2.png") repeat scroll 0 0;
+    display: block;
+    height: 60px;
+    margin-left: 135px;
+    margin-top: 30px;
+    width: 60px;
+}
+

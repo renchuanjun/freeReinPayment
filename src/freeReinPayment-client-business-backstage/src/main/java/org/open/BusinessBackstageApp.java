@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,8 @@ import feign.RequestInterceptor;
 @EnableAutoConfiguration
 @EnableConfigurationProperties({ConfigProperties.class})
 @EnableRedisHttpSession(redisNamespace="fuqinfinance-client-api-backstage")
-public class APIBackstageApp {
+@EnableCircuitBreaker//为断路器监控提供数据
+public class BusinessBackstageApp {
 	
     @Autowired
     private ConfigProperties configProperties;
@@ -33,7 +35,7 @@ public class APIBackstageApp {
     private ResourceLoader resourceLoader;
     
 	public static void main(String[] args) {
-		SpringApplication.run(APIBackstageApp.class, args);
+		SpringApplication.run(BusinessBackstageApp.class, args);
 	}
 	
 

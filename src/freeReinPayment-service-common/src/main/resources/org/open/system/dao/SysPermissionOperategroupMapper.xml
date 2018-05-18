@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fuqin.system.dao.SysOperategroupMapper" >
-  <resultMap id="BaseResultMap" type="com.fuqin.system.model.SysOperategroup" >
-    <id column="group_id" property="groupId" jdbcType="VARCHAR" />
-    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
-    <result column="group_description" property="groupDescription" jdbcType="VARCHAR" />
-    <result column="group_permission_md5" property="groupPermissionMd5" jdbcType="VARCHAR" />
+<mapper namespace="org.open.system.dao.SysPermissionOperategroupMapper" >
+  <resultMap id="BaseResultMap" type="org.open.system.model.SysPermissionOperategroup" >
+    <id column="group_row_id" property="groupRowId" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="VARCHAR" />
+    <result column="row_id" property="rowId" jdbcType="VARCHAR" />
+    <result column="check_status" property="checkStatus" jdbcType="TINYINT" />
     <result column="fore_back_type" property="foreBackType" jdbcType="TINYINT" />
     <result column="is_enable" property="isEnable" jdbcType="TINYINT" />
     <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
@@ -19,48 +19,48 @@
     <result column="data_permission_id" property="dataPermissionId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    group_id, group_name, group_description, group_permission_md5, fore_back_type, is_enable,
-    is_deleted, create_by, create_on, create_by_name, update_by, update_on, update_by_name,
-    platform_id, data_permission_id
+    group_row_id, group_id, row_id, check_status, fore_back_type, is_enable, is_deleted,
+    create_by, create_on, create_by_name, update_by, update_on, update_by_name, platform_id,
+    data_permission_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
-    from sys_operategroup
-    where group_id = #{groupId,jdbcType=VARCHAR}
+    from sys_permission_operategroup
+    where group_row_id = #{groupRowId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from sys_operategroup
-    where group_id = #{groupId,jdbcType=VARCHAR}
+    delete from sys_permission_operategroup
+    where group_row_id = #{groupRowId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.fuqin.system.model.SysOperategroup" >
-    insert into sys_operategroup (group_id, group_name, group_description,
-    group_permission_md5, fore_back_type, is_enable,
+  <insert id="insert" parameterType="org.open.system.model.SysPermissionOperategroup" >
+    insert into sys_permission_operategroup (group_row_id, group_id, row_id,
+    check_status, fore_back_type, is_enable,
     is_deleted, create_by, create_on,
     create_by_name, update_by, update_on,
     update_by_name, platform_id, data_permission_id
     )
-    values (#{groupId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{groupDescription,jdbcType=VARCHAR},
-    #{groupPermissionMd5,jdbcType=VARCHAR}, #{foreBackType,jdbcType=TINYINT}, #{isEnable,jdbcType=TINYINT},
+    values (#{groupRowId,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{rowId,jdbcType=VARCHAR},
+    #{checkStatus,jdbcType=TINYINT}, #{foreBackType,jdbcType=TINYINT}, #{isEnable,jdbcType=TINYINT},
     #{isDeleted,jdbcType=TINYINT}, #{createBy,jdbcType=VARCHAR}, #{createOn,jdbcType=TIMESTAMP},
     #{createByName,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, #{updateOn,jdbcType=TIMESTAMP},
     #{updateByName,jdbcType=VARCHAR}, #{platformId,jdbcType=VARCHAR}, #{dataPermissionId,jdbcType=VARCHAR}
     )
   </insert>
-  <insert id="insertSelective" parameterType="com.fuqin.system.model.SysOperategroup" >
-    insert into sys_operategroup
+  <insert id="insertSelective" parameterType="org.open.system.model.SysPermissionOperategroup" >
+    insert into sys_permission_operategroup
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupRowId != null" >
+        group_row_id,
+      </if>
       <if test="groupId != null" >
         group_id,
       </if>
-      <if test="groupName != null" >
-        group_name,
+      <if test="rowId != null" >
+        row_id,
       </if>
-      <if test="groupDescription != null" >
-        group_description,
-      </if>
-      <if test="groupPermissionMd5 != null" >
-        group_permission_md5,
+      <if test="checkStatus != null" >
+        check_status,
       </if>
       <if test="foreBackType != null" >
         fore_back_type,
@@ -97,17 +97,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupRowId != null" >
+        #{groupRowId,jdbcType=VARCHAR},
+      </if>
       <if test="groupId != null" >
         #{groupId,jdbcType=VARCHAR},
       </if>
-      <if test="groupName != null" >
-        #{groupName,jdbcType=VARCHAR},
+      <if test="rowId != null" >
+        #{rowId,jdbcType=VARCHAR},
       </if>
-      <if test="groupDescription != null" >
-        #{groupDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="groupPermissionMd5 != null" >
-        #{groupPermissionMd5,jdbcType=VARCHAR},
+      <if test="checkStatus != null" >
+        #{checkStatus,jdbcType=TINYINT},
       </if>
       <if test="foreBackType != null" >
         #{foreBackType,jdbcType=TINYINT},
@@ -144,17 +144,17 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fuqin.system.model.SysOperategroup" >
-    update sys_operategroup
+  <update id="updateByPrimaryKeySelective" parameterType="org.open.system.model.SysPermissionOperategroup" >
+    update sys_permission_operategroup
     <set >
-      <if test="groupName != null" >
-        group_name = #{groupName,jdbcType=VARCHAR},
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=VARCHAR},
       </if>
-      <if test="groupDescription != null" >
-        group_description = #{groupDescription,jdbcType=VARCHAR},
+      <if test="rowId != null" >
+        row_id = #{rowId,jdbcType=VARCHAR},
       </if>
-      <if test="groupPermissionMd5 != null" >
-        group_permission_md5 = #{groupPermissionMd5,jdbcType=VARCHAR},
+      <if test="checkStatus != null" >
+        check_status = #{checkStatus,jdbcType=TINYINT},
       </if>
       <if test="foreBackType != null" >
         fore_back_type = #{foreBackType,jdbcType=TINYINT},
@@ -190,13 +190,13 @@
         data_permission_id = #{dataPermissionId,jdbcType=VARCHAR},
       </if>
     </set>
-    where group_id = #{groupId,jdbcType=VARCHAR}
+    where group_row_id = #{groupRowId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fuqin.system.model.SysOperategroup" >
-    update sys_operategroup
-    set group_name = #{groupName,jdbcType=VARCHAR},
-      group_description = #{groupDescription,jdbcType=VARCHAR},
-      group_permission_md5 = #{groupPermissionMd5,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="org.open.system.model.SysPermissionOperategroup" >
+    update sys_permission_operategroup
+    set group_id = #{groupId,jdbcType=VARCHAR},
+      row_id = #{rowId,jdbcType=VARCHAR},
+      check_status = #{checkStatus,jdbcType=TINYINT},
       fore_back_type = #{foreBackType,jdbcType=TINYINT},
       is_enable = #{isEnable,jdbcType=TINYINT},
       is_deleted = #{isDeleted,jdbcType=TINYINT},
@@ -208,57 +208,38 @@
       update_by_name = #{updateByName,jdbcType=VARCHAR},
       platform_id = #{platformId,jdbcType=VARCHAR},
       data_permission_id = #{dataPermissionId,jdbcType=VARCHAR}
-    where group_id = #{groupId,jdbcType=VARCHAR}
+    where group_row_id = #{groupRowId,jdbcType=VARCHAR}
   </update>
 
-  <!--~~~~~~~~~~~~~~~~~~~~~~~-->
-
-  <!--分页-->
-  <select id="selectSysOperategroupByPage" resultMap="BaseResultMap">
-    SELECT
-    group_id, group_name, group_description, create_on,is_enable
-    FROM
-    sys_operategroup
-    <where>
-      is_deleted = 0
-      AND
-      is_enable = 1
-      AND
-      fore_back_type = #{operategroup.foreBackType,jdbcType=TINYINT}
-      <if test="operategroup.groupName != null and '' != operategroup.groupName ">
-        AND group_name LIKE
-        CONCAT('%',#{operategroup.groupName,jdbcType=VARCHAR},'%')
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  <update id="deleteSysPermissionOperategroup" parameterType="org.open.system.model.SysPermissionOperategroup">
+    update sys_permission_operategroup
+    <set >
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
       </if>
-    </where>
-    ORDER BY ${args.sortOrderName}
-    limit #{args.pageIndex,jdbcType=INTEGER}
-    ,#{args.pageSize,jdbcType=INTEGER};
-  </select>
-
-  <select id="selectSysOperategroupByPageCount" resultType="java.lang.Integer">
-    SELECT
-    COUNT(group_id)
-    FROM
-    sys_operategroup
-    <where>
-      is_deleted = 0
-      AND
-      is_enable = 1
-      AND
-      fore_back_type = #{operategroup.foreBackType,jdbcType=TINYINT}
-      <if test="operategroup.groupName != null and '' != operategroup.groupName ">
-        AND group_name LIKE
-        CONCAT('%',#{operategroup.groupName,jdbcType=VARCHAR},'%')
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
       </if>
-    </where>
-  </select>
-  <!--角色选项卡加载操作组数据-->
-  <select id="selectSysOperategroupToRole" resultMap="BaseResultMap">
-    select
-    group_id, group_name, create_on
-    from sys_operategroup
-    where is_deleted=0 and is_enable=1
-    and fore_back_type = #{foreBackType,jdbcType=INTEGER}
-    and group_id = #{groupId,jdbcType=VARCHAR}
+      <if test="updateOn != null" >
+        update_on = #{updateOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateByName != null" >
+        update_by_name = #{updateByName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where is_deleted = 0
+    AND is_enable = 1
+    AND fore_back_type = #{foreBackType,jdbcType=TINYINT}
+    AND group_id = #{groupId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getSysPermissionOperategroupByGroupId" resultMap="BaseResultMap">
+    SELECT group_row_id,row_id, group_id,check_status FROM
+    sys_permission_operategroup
+    WHERE is_deleted = 0
+    AND is_enable = 1
+    AND fore_back_type = #{foreBackType,jdbcType=INTEGER}
+    AND group_id = #{groupId,jdbcType=VARCHAR}
   </select>
 </mapper>

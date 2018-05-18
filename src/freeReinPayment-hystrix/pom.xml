@@ -7,29 +7,37 @@
 		<groupId>org.xuanyuan</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>freeReinPayment-gateway</artifactId>
-	<name>freeReinPayment-gateway</name>
-	<url>http://maven.apache.org</url>
+	<groupId>org.xuanyuan</groupId>
+	<artifactId>freeReinPayment-hystrix</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>freeReinPayment-hystrix</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-zuul</artifactId>
-			<!-- <version>1.2.3.RELEASE</version> -->
+			<artifactId>spring-cloud-starter-turbine</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-netflix-turbine</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
-			<!-- <version>1.2.3.RELEASE</version> -->
-		</dependency>
-		
-		<dependency>
-			<groupId>com.netflix.zuul</groupId>
-			<artifactId>zuul-core</artifactId>
-			<version>1.2.2</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
@@ -44,7 +52,7 @@
 		</dependencies>
 	</dependencyManagement>
 	<build>
-		<finalName>freeReinPayment-gateway</finalName>
+		<finalName>freeReinPayment-hystrix</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

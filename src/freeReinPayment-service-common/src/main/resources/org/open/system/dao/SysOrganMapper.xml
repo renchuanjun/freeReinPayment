@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fuqin.system.dao.SysOrganMapper" >
-  <resultMap id="BaseResultMap" type="com.fuqin.system.model.SysOrgan" >
+<mapper namespace="org.open.system.dao.SysOrganMapper" >
+  <resultMap id="BaseResultMap" type="org.open.system.model.SysOrgan" >
     <id column="organ_id" property="organId" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="organ_full_id" property="organFullId" jdbcType="VARCHAR" />
@@ -45,7 +45,7 @@
     delete from sys_organ
     where organ_id = #{organId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.fuqin.system.model.SysOrgan" >
+  <insert id="insert" parameterType="org.open.system.model.SysOrgan" >
     insert into sys_organ (organ_id, parent_id, organ_full_id, 
       organ_code, organ_name, organ_full_name, 
       organ_level, order_by, telphone, 
@@ -65,7 +65,7 @@
       #{updateBy,jdbcType=VARCHAR}, #{updateOn,jdbcType=TIMESTAMP}, #{updateByName,jdbcType=VARCHAR}, 
       #{platformId,jdbcType=VARCHAR}, #{dataPermissionId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.fuqin.system.model.SysOrgan" useGeneratedKeys="true" keyProperty="organId">
+  <insert id="insertSelective" parameterType="org.open.system.model.SysOrgan" useGeneratedKeys="true" keyProperty="organId">
     insert into sys_organ
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="parentId != null" >
@@ -222,7 +222,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fuqin.system.model.SysOrgan" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.open.system.model.SysOrgan" >
     update sys_organ
     <set >
       <if test="parentId != null" >
@@ -303,7 +303,7 @@
     </set>
     where organ_id = #{organId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fuqin.system.model.SysOrgan" >
+  <update id="updateByPrimaryKey" parameterType="org.open.system.model.SysOrgan" >
     update sys_organ
     set parent_id = #{parentId,jdbcType=INTEGER},
       organ_full_id = #{organFullId,jdbcType=VARCHAR},

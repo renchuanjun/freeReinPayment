@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fuqin.system.dao.SysRoleMapper" >
-  <resultMap id="BaseResultMap" type="com.fuqin.system.model.SysRole" >
+<mapper namespace="org.open.system.dao.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="org.open.system.model.SysRole" >
     <id column="role_id" property="roleId" jdbcType="VARCHAR" />
     <result column="organ_id" property="organId" jdbcType="VARCHAR" />
     <result column="group_id" property="groupId" jdbcType="VARCHAR" />
@@ -37,7 +37,7 @@
     delete from sys_role
     where role_id = #{roleId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.fuqin.system.model.SysRole" >
+  <insert id="insert" parameterType="org.open.system.model.SysRole" >
     insert into sys_role (role_id, organ_id, group_id,
     role_name, organ_full_id, comments,
     role_user_md5, role_datapermission_md5, fore_back_type,
@@ -53,7 +53,7 @@
     #{updateOn,jdbcType=TIMESTAMP}, #{updateByName,jdbcType=VARCHAR}, #{platformId,jdbcType=VARCHAR},
     #{dataPermissionId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.fuqin.system.model.SysRole" >
+  <insert id="insertSelective" parameterType="org.open.system.model.SysRole" >
     insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="roleId != null" >
@@ -174,7 +174,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fuqin.system.model.SysRole" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.open.system.model.SysRole" >
     update sys_role
     <set >
       <if test="organId != null" >
@@ -233,7 +233,7 @@
     </set>
     where role_id = #{roleId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fuqin.system.model.SysRole" >
+  <update id="updateByPrimaryKey" parameterType="org.open.system.model.SysRole" >
     update sys_role
     set organ_id = #{organId,jdbcType=VARCHAR},
     group_id = #{groupId,jdbcType=VARCHAR},

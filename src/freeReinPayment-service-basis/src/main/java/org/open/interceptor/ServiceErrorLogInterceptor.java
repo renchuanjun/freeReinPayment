@@ -16,7 +16,7 @@ public class ServiceErrorLogInterceptor {
     /***
      * 切入点
      */
-    @Pointcut(value = "execution(public com.fuqin.model.FQResult com.fuqin..*.service.*.*(..))")
+    @Pointcut(value = "execution(public org.open.model.FQResult org.open..*.service.*.*(..))")
     public void pointCut() {
 
     }

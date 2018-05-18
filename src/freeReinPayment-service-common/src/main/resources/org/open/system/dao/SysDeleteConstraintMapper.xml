@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fuqin.system.dao.SysDeleteConstraintMapper" >
-  <resultMap id="BaseResultMap" type="com.fuqin.system.model.SysDeleteConstraint" >
+<mapper namespace="org.open.system.dao.SysDeleteConstraintMapper" >
+  <resultMap id="BaseResultMap" type="org.open.system.model.SysDeleteConstraint" >
     <id column="del_id" property="delId" jdbcType="INTEGER" />
     <result column="table_from" property="tableFrom" jdbcType="VARCHAR" />
     <result column="table_to" property="tableTo" jdbcType="VARCHAR" />
@@ -33,7 +33,7 @@
     delete from sys_delete_constraint
     where del_id = #{delId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.fuqin.system.model.SysDeleteConstraint" >
+  <insert id="insert" parameterType="org.open.system.model.SysDeleteConstraint" >
     insert into sys_delete_constraint (del_id, table_from, table_to, 
       table_to_pkId, constraint_field, is_enable, 
       is_deleted, create_by, create_on, 
@@ -47,7 +47,7 @@
       #{updateByName,jdbcType=VARCHAR}, #{platformId,jdbcType=VARCHAR}, #{dataPermissionId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.fuqin.system.model.SysDeleteConstraint"  useGeneratedKeys="true" keyProperty="delId">
+  <insert id="insertSelective" parameterType="org.open.system.model.SysDeleteConstraint"  useGeneratedKeys="true" keyProperty="delId">
     insert into sys_delete_constraint
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="tableFrom != null" >
@@ -138,7 +138,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fuqin.system.model.SysDeleteConstraint" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.open.system.model.SysDeleteConstraint" >
     update sys_delete_constraint
     <set >
       <if test="tableFrom != null" >
@@ -186,7 +186,7 @@
     </set>
     where del_id = #{delId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fuqin.system.model.SysDeleteConstraint" >
+  <update id="updateByPrimaryKey" parameterType="org.open.system.model.SysDeleteConstraint" >
     update sys_delete_constraint
     set table_from = #{tableFrom,jdbcType=VARCHAR},
       table_to = #{tableTo,jdbcType=VARCHAR},

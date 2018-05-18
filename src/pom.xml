@@ -14,7 +14,6 @@
 		<module>freeReinPayment-model-common</module>
 		<module>freeReinPayment-service-basis</module>
 		<module>freeReinPayment-service-common</module>
-		<module>freeReinPayment-hystrix-api</module>
 		<module>freeReinPayment-utils</module>  
   </modules>
 	<parent>

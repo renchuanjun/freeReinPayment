@@ -14,8 +14,9 @@
 		<module>freeReinPayment-model-common</module>
 		<module>freeReinPayment-service-basis</module>
 		<module>freeReinPayment-service-common</module>
-		<module>freeReinPayment-utils</module>  
-  </modules>
+		<module>freeReinPayment-utils</module>
+	
+	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

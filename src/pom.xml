@@ -14,6 +14,7 @@
 		<module>freeReinPayment-model-common</module>
 		<module>freeReinPayment-service-basis</module>
 		<module>freeReinPayment-service-common</module>
+		<module>freeReinPayment-service-task</module>
 		<module>freeReinPayment-utils</module>
     <module>freeReinPayment-hystrix</module>
   </modules>
@@ -112,4 +113,16 @@
 			</resource>
 		</resources>
 	</build>
+	<repositories>
+		<repository>
+			<id>alimaven</id>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>alimaven</id>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+		</pluginRepository>
+	</pluginRepositories>
 </project>

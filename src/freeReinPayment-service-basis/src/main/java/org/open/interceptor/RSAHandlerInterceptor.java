@@ -1,6 +1,6 @@
 package org.open.interceptor;
 
-import org.open.ConfigProperties;
+import org.open.BasisConfigProperties;
 import org.open.utils.LogTextUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 public class RSAHandlerInterceptor implements HandlerInterceptor {
 
 
-    private ConfigProperties configProperties;
+    private BasisConfigProperties configProperties;
 
-    public void setConfigProperties(ConfigProperties configProperties) {
+    public void setConfigProperties(BasisConfigProperties configProperties) {
         this.configProperties = configProperties;
     }
 

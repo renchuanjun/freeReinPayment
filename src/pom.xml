@@ -12,6 +12,7 @@
 		<module>freeReinPayment-client-business-backstage</module>
 		<module>freeReinPayment-model-basis</module>
 		<module>freeReinPayment-model-common</module>
+		<module>freeReinPayment-model-task</module>
 		<module>freeReinPayment-service-basis</module>
 		<module>freeReinPayment-service-common</module>
 		<module>freeReinPayment-service-task</module>

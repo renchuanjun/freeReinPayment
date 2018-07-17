@@ -1,7 +1,7 @@
 package org.open.filter;
 
 
-import org.open.ConfigProperties;
+import org.open.BasisConfigProperties;
 import org.open.basis.BodyReaderHttpServletRequestWrapper;
 import org.open.utils.AppUtils;
 import org.open.utils.Base64Utils;
@@ -26,13 +26,13 @@ import java.util.Calendar;
  */
 public class RSAFilter implements Filter {
 
-    private ConfigProperties configProperties;
+    private BasisConfigProperties configProperties;
     private ResourceLoader resourceLoader;
-    public ConfigProperties getConfigProperties() {
+    public BasisConfigProperties getConfigProperties() {
         return configProperties;
     }
 
-    public void setConfigProperties(ConfigProperties configProperties) {
+    public void setConfigProperties(BasisConfigProperties configProperties) {
         this.configProperties = configProperties;
     }
 

@@ -1,21 +1,20 @@
 package org.open.configuration;
 
-import org.open.ConfigProperties;
+import org.open.BasisConfigProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * Created by lenovo on 2017/4/13.
  */
-@EnableConfigurationProperties({ConfigProperties.class})
+@EnableConfigurationProperties({BasisConfigProperties.class})
 @Configuration
 public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 
     @Autowired
-    private ConfigProperties configProperties;
+    private BasisConfigProperties configProperties;
 
     /***
      * 添加自定义拦截器

@@ -14,11 +14,11 @@ import org.springframework.core.io.ResourceLoader;
 @EnableDiscoveryClient //该注解能激活Eureka中的DiscoveryClient实现，才能实现Controller中对服务信息的输出
 @SpringBootApplication //是一个spring boot项目
 @EnableAutoConfiguration
-@EnableConfigurationProperties({ConfigProperties.class})
+@EnableConfigurationProperties({BasisConfigProperties.class})
 public class TaskServiceApp {
 
     @Autowired
-    private ConfigProperties configProperties;
+    private BasisConfigProperties configProperties;
 
     @Autowired
     private ResourceLoader resourceLoader;

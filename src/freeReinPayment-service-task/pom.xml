@@ -16,20 +16,19 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
-
     <dependency>
       <groupId>org.xuanyuan</groupId>
-      <artifactId>freeReinPayment-model-common</artifactId>
+      <artifactId>freeReinPayment-service-basis</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.xuanyuan</groupId>
+      <artifactId>freeReinPayment-model-task</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.xuanyuan</groupId>
       <artifactId>freeReinPayment-utils</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>org.xuanyuan</groupId>
-      <artifactId>freeReinPayment-service-basis</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <!--引入spring cloud的相关的应用的jar-->
@@ -58,9 +57,19 @@
       <artifactId>druid</artifactId>
       <version>1.0.27</version>
     </dependency>
-
+      <dependency>
+          <groupId>org.xuanyuan</groupId>
+          <artifactId>freeReinPayment-model-task</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+          <scope>compile</scope>
+      </dependency>
+    <dependency>
+      <groupId>org.xuanyuan</groupId>
+      <artifactId>freeReinPayment-client-basis</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -75,7 +84,6 @@
 
   <build>
     <finalName>fuqinfinance-service-task</finalName>
-
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>

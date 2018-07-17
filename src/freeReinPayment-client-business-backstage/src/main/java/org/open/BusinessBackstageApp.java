@@ -24,7 +24,7 @@ import feign.RequestInterceptor;
 @EnableFeignClients //注解开启Feign功能
 @EnableAutoConfiguration
 @EnableConfigurationProperties({ConfigProperties.class})
-@EnableRedisHttpSession(redisNamespace="fuqinfinance-client-api-backstage")
+@EnableRedisHttpSession(redisNamespace="freeReinPayment-client-api-backstage")
 @EnableCircuitBreaker//为断路器监控提供数据
 public class BusinessBackstageApp {
 	

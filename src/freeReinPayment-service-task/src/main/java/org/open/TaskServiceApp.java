@@ -9,16 +9,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 @EnableDiscoveryClient //该注解能激活Eureka中的DiscoveryClient实现，才能实现Controller中对服务信息的输出
 @SpringBootApplication //是一个spring boot项目
 @EnableAutoConfiguration
-@EnableConfigurationProperties({BasisConfigProperties.class})
+@EnableConfigurationProperties({ConfigProperties.class})
 public class TaskServiceApp {
 
     @Autowired
-    private BasisConfigProperties configProperties;
+    private ConfigProperties configProperties;
 
     @Autowired
     private ResourceLoader resourceLoader;
@@ -28,7 +30,14 @@ public class TaskServiceApp {
         builder.listeners(new MyApplicationEnvironmentPreparedEventListener());
         builder.web(true).run(args);
     }
-
+    /***
+     * 定时任务
+     * @return
+     */
+    @Bean
+    public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
+        return new ThreadPoolTaskScheduler();
+    }
 
     /*@Bean
     public FilterRegistrationBean rsaFilterRegistrationBean() {

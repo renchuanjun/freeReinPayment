@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix="config")
 public class ConfigProperties extends BasisConfigProperties{
 
+
     private boolean task;
 
     public boolean isTask() {
@@ -18,5 +19,4 @@ public class ConfigProperties extends BasisConfigProperties{
     public void setTask(boolean task) {
         this.task = task;
     }
-
 }

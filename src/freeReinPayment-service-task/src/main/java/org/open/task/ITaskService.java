@@ -1,7 +1,6 @@
 package org.open.task;
 
 
-import com.fuqin.utils.MyException;
 import org.open.utils.MyException;
 
 /**

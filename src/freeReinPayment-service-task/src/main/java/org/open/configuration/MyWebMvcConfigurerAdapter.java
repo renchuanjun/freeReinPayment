@@ -1,6 +1,7 @@
 package org.open.configuration;
 
 import org.open.BasisConfigProperties;
+import org.open.ConfigProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +14,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 
-    @Autowired
-    private BasisConfigProperties configProperties;
+//    @Autowired
+//    private ConfigProperties configProperties;
 
     /***
      * 添加自定义拦截器

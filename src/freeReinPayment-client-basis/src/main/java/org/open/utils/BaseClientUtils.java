@@ -2,8 +2,7 @@ package org.open.utils;
 
 import org.apache.commons.lang.StringUtils;
 import org.open.config.BaseConfigProperties;
-import org.open.utils.AppUtils;
-import org.open.utils.Base64Utils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;

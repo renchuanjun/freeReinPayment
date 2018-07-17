@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fuqin.timed.dao.TimedTaskMapper" >
-  <resultMap id="BaseResultMap" type="com.fuqin.timed.pojo.TimedTask" >
+<mapper namespace="org.open.timedtask.dao.TimedTaskMapper" >
+  <resultMap id="BaseResultMap" type="org.open.task.model.TimedTask" >
     <id column="task_id" property="taskId" jdbcType="INTEGER" />
     <result column="task_name" property="taskName" jdbcType="VARCHAR" />
     <result column="execute_time" property="executeTime" jdbcType="VARCHAR" />
@@ -21,13 +21,13 @@
     delete from timed_task
     where task_id = #{taskId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.fuqin.timed.pojo.TimedTask" >
+  <insert id="insert" parameterType="org.open.task.model.TimedTask" >
     insert into timed_task (task_id, task_name, execute_time, 
       is_start)
     values (#{taskId,jdbcType=INTEGER}, #{taskName,jdbcType=VARCHAR}, #{executeTime,jdbcType=VARCHAR}, 
       #{isStart,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.fuqin.timed.pojo.TimedTask" >
+  <insert id="insertSelective" parameterType="org.open.task.model.TimedTask" >
     insert into timed_task
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="taskId != null" >
@@ -58,7 +58,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fuqin.timed.pojo.TimedTask" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.open.task.model.TimedTask" >
     update timed_task
     <set >
       <if test="taskName != null" >
@@ -73,7 +73,7 @@
     </set>
     where task_id = #{taskId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fuqin.timed.pojo.TimedTask" >
+  <update id="updateByPrimaryKey" parameterType="org.open.task.model.TimedTask" >
     update timed_task
     set task_name = #{taskName,jdbcType=VARCHAR},
       execute_time = #{executeTime,jdbcType=VARCHAR},
@@ -97,7 +97,7 @@
     where  task_name = #{taskName,jdbcType=VARCHAR}
   </select>
   <!--根据定时任务名称更新定时时间-->
-  <update id="updateByPrimaryTaskName" parameterType="com.fuqin.timed.pojo.TimedTask" >
+  <update id="updateByPrimaryTaskName" parameterType="org.open.task.model.TimedTask" >
     update timed_task
     <set >
       <if test="executeTime != null" >

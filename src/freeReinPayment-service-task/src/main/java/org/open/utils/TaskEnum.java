@@ -2,7 +2,8 @@ package org.open.utils;
 
 
 import org.open.task.ITaskService;
-import org.open.task.demo.TestDemoTask;
+import org.open.task.demo.Demo1Task;
+import org.open.task.demo.Demo2Task;
 
 /**
  * @author 任传君
@@ -12,8 +13,8 @@ public class TaskEnum {
 
     public enum Task{
 
-        INVRETURNRECORD_TASK("TestDemoTask", TestDemoTask.class);
-
+        DEMO1_TASK("TestDemo1Task", Demo1Task.class),
+        DEMO2_TASK("TestDemo2Task", Demo2Task.class);
         private String name;
 
         private Class aClass;

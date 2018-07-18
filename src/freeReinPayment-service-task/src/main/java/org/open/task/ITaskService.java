@@ -1,6 +1,10 @@
 package org.open.task;
 
 
+import org.open.model.FQResult;
+import org.open.model.PagerAndOrderByArgs;
+import org.open.model.PaginationSupport;
+import org.open.task.model.TimedTask;
 import org.open.utils.MyException;
 
 /**
@@ -24,10 +28,11 @@ public interface ITaskService {
     /**
      * 重启时器
      */
-    void restartTask(String taskName) throws MyException, MyException;
+    void restartTask(TimedTask timedTask) throws MyException, MyException;
 
     /**
      * 重置定时器
      */
     void resetTask(String time);
+
 }

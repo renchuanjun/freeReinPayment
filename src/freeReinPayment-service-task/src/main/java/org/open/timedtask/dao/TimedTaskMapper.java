@@ -1,6 +1,8 @@
 package org.open.timedtask.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.open.model.PagerAndOrderByArgs;
 import org.open.task.model.TimedTask;
 
 import java.util.List;
@@ -24,4 +26,10 @@ public interface TimedTaskMapper {
     TimedTask selectByPrimaryTaskName(String taskName);
 
     int updateByPrimaryTaskName(TimedTask record);
+
+    List<TimedTask> selectTimedTaskByPage(
+            @Param("timedTask")TimedTask timedTask,
+            @Param("args")PagerAndOrderByArgs args);
+
+    int selectTimedTaskByPageCount(@Param("timedTask")TimedTask timedTask);
 }

@@ -15,8 +15,7 @@ import org.springframework.stereotype.Component;
 public class OperategroupServiceHystrix implements IOperategroupService{
 
 	@Override
-	public FQResult<PaginationSupport<SysOperategroup>> getSysOperategroupList(
-			FQParam2<SysOperategroup, PagerAndOrderByArgs> hnaParam) {
+	public FQResult<PaginationSupport<SysOperategroup>> getSysOperategroupList(FQParam2<SysOperategroup, PagerAndOrderByArgs> hnaParam) {
 		FQResult<PaginationSupport<SysOperategroup>> fqResult = new FQResult<PaginationSupport<SysOperategroup>>();
 		fqResult.setStateCode("-9999");
 		fqResult.setDetailInfo("getTestList-fallback");

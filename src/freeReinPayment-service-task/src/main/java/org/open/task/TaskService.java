@@ -21,13 +21,6 @@ public abstract class TaskService implements ITaskService {
     @Autowired
     private TimedTaskMapper timedTaskMapper;
 
-    @Autowired
-    private ThreadPoolTaskScheduler threadPoolTaskScheduler;
-
-    public ThreadPoolTaskScheduler getThreadPoolTaskScheduler() {
-        return threadPoolTaskScheduler;
-    }
-
     abstract public void startTask(String time);
 
     @Override
@@ -38,8 +31,7 @@ public abstract class TaskService implements ITaskService {
     }
 
     @Override
-    public void restartTask(String taskName) throws MyException {
-        TimedTask timedTask = this.timedTaskMapper.selectByPrimaryTaskName(taskName);
+    public void restartTask(TimedTask timedTask) throws MyException {
         if(null != timedTask) {
             String time = timedTask.getExecuteTime();//查询数据库获取启动时间
             stopTask();

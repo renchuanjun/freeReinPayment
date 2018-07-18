@@ -22,6 +22,16 @@ public class TimedTask implements java.io.Serializable{
     private Integer isStart;
 
     /**
+     * 备注
+     */
+    private String remarks;
+
+    /**
+     * 定时器名称
+     */
+    private String name;
+
+    /**
      * 定时任务ID
      */
     public Integer getTaskId() {
@@ -75,5 +85,33 @@ public class TimedTask implements java.io.Serializable{
      */
     public void setIsStart(Integer isStart) {
         this.isStart = isStart;
+    }
+
+    /**
+     * 备注
+     */
+    public String getRemarks() {
+        return remarks;
+    }
+
+    /**
+     * 备注
+     */
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    /**
+     * 定时器名称
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * 定时器名称
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 }

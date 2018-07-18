@@ -7,96 +7,11 @@
 	<siteMapNode id="basicInformation" resourceID="02-00-00-00-00-00" ismenu="true" title="基础信息管理" imageUrl="" url="#" fixed="false" mapClass="icon-archive">
 	  <siteMapNode id="regional_management_list" resourceID="01-02-00-00-00-00" ismenu="true" title="区域管理"  imageUrl="#" url="" target="_self" mapClass=""/>
 	</siteMapNode> 
-	<!--(账户管理)-->
-	<siteMapNode id="accountManagement" resourceID="03-00-00-00-00-00" ismenu="true" title="账户管理" imageUrl="" url="#" fixed="false" mapClass="icon-user">
-	  <siteMapNode id="user_management_list" resourceID="03-01-00-00-00-00" ismenu="true" title="用户管理"  imageUrl="" url="#" target="_self" mapClass=""/>
+	<!--(定时任务管理)-->
+	<siteMapNode id="mapTask" resourceID="03-00-00-00-00-00" ismenu="true" title="定时任务管理" imageUrl="" url="#" fixed="false" mapClass="icon-time">
+	  <siteMapNode id="demoTask_list" resourceID="03-01-00-00-00-00" ismenu="true" title="定时任务管理"  imageUrl="" url="/task/list" target="_self" mapClass=""/>
 	</siteMapNode> 
-	
-	<!--(投资管理)-->
-	<siteMapNode id="investmentManagement" resourceID="04-00-00-00-00-00" ismenu="true" title="投资管理" imageUrl="" url="#" fixed="false" mapClass="icon-credit-card">
-	  <siteMapNode id="capital_details_list" resourceID="04-01-00-00-00-00" ismenu="true" title="资金明细"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="investment_records_list" resourceID="04-02-00-00-00-00" ismenu="true" title="投资记录"  imageUrl="#" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="received_payments_detailed_list" resourceID="04-03-00-00-00-00" ismenu="true" title="理财计划回款明细"  imageUrl="#" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="redemption_management_list" resourceID="04-04-00-00-00-00" ismenu="true" title="赎回管理"  imageUrl="#" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="advance_redemption_application_list" resourceID="04-05-00-00-00-00" ismenu="true" title="提前赎回申请管理"  imageUrl="#" url="#" target="_self" mapClass=""/>
-	</siteMapNode> 
-	
-	<!--(贷后管理)-->
-	<siteMapNode id="afterloanManagement" resourceID="05-00-00-00-00-00" ismenu="true" title="贷后管理" imageUrl="" url="#" fixed="false" mapClass="icon-comments-alt">
-	  <siteMapNode id="repayments_list" resourceID="05-01-00-00-00-00" ismenu="true" title="还款列表"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="early_repayment_list" resourceID="05-02-00-00-00-00" ismenu="true" title="提前还款管理"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="loan_management_list" resourceID="05-03-00-00-00-00" ismenu="true" title="借款管理"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="today_borrowerrepay_list" resourceID="05-04-00-00-00-00" ismenu="true" title="当日应还款划扣"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="display_time_list" resourceID="05-05-00-00-00-00" ismenu="true" title="展期列表"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="Expect_list" resourceID="05-06-00-00-00-00" ismenu="true" title="预期管理"  imageUrl="" url="#" target="_self" mapClass=""/>
-	</siteMapNode> 
-	
-	<!--(线下业务管理)-->
-	<siteMapNode id="newbieTask" resourceID="06-00-00-00-00-00" ismenu="true" title="线下业务管理" imageUrl="" url="#" fixed="false" mapClass="icon-dashboard">
-	  <siteMapNode id="customer_list" resourceID="06-01-00-00-00-00" ismenu="true" title="客户固定类投资列表"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="manager_management_list" resourceID="06-02-00-00-00-00" ismenu="true" title="业务员管理"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="wealth_treasure_list" resourceID="06-03-00-00-00-00" ismenu="true" title="客户财富宝投资列表"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="newborrower_openaccount_list" resourceID="06-04-00-00-00-00" ismenu="true" title="新借款人开户"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="recommended_relationship_list" resourceID="06-05-00-00-00-00" ismenu="true" title="推荐关系维护"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="headquarters_date_authorization_list" resourceID="06-06-00-00-00-00" ismenu="true" title="总部日期授权"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="recommender_relationHR_list" resourceID="06-07-00-00-00-00" ismenu="true" title="入离职推荐关系列表"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="customer_investment_list" resourceID="06-08-00-00-00-00" ismenu="true" title="客户散标投资列表"  imageUrl="" url="#" target="_self" mapClass=""/>
-	</siteMapNode>
-	
-	<!--(标的管理)-->
-	<siteMapNode id="targetManagement" resourceID="07-00-00-00-00-00" ismenu="true" title="标的管理" imageUrl="" url="#" fixed="false" mapClass="icon-flag">
-	  <siteMapNode id="target_management_list" resourceID="07-01-00-00-00-00" ismenu="true" title="标的管理"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="direct_borrow_list" resourceID="07-02-00-00-00-00" ismenu="true" title="散标流满表管理"  imageUrl="" url="#" target="_self" mapClass=""/>
-	</siteMapNode> 
-	
-	<!--(债权匹配管理)-->
-	<siteMapNode id="creditorMatchManagement" resourceID="08-00-00-00-00-00" ismenu="true" title="债权匹配管理" imageUrl="" url="#" fixed="false" mapClass="icon-retweet">
-	  <siteMapNode id="creditor_match_list" resourceID="08-01-00-00-00-00" ismenu="true" title="按债权匹配"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="borrow_match_result_list" resourceID="08-02-00-00-00-00" ismenu="true" title="借款匹配结果"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="investmatch_result_list" resourceID="08-03-00-00-00-00" ismenu="true" title="投资匹配结果"  imageUrl="" url="#" target="_self" mapClass=""/>
-	</siteMapNode> 
-	
-	<!--(财务管理)-->
-	<siteMapNode id="financialManagement" resourceID="08-00-00-00-00-00" ismenu="true" title="财务管理" imageUrl="" url="#" fixed="false" mapClass="icon-yen ">
-	  <siteMapNode id="creditor_match_list" resourceID="08-01-00-00-00-00" ismenu="true" title="借款放款"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="withdraw_money_examine_list" resourceID="08-02-00-00-00-00" ismenu="true" title="提现审核"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="fortune_recover_manage_list" resourceID="08-03-00-00-00-00" ismenu="true" title="理财计划回款"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="redeemloan_manage_list" resourceID="08-04-00-00-00-00" ismenu="true" title="财富宝赎回放款"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="channel_free_list" resourceID="08-05-00-00-00-00" ismenu="true" title="渠道费放款"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="trading_state_list" resourceID="08-06-00-00-00-00" ismenu="true" title="交易状态查询"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="individual_account_list" resourceID="08-07-00-00-00-00" ismenu="true" title="个人账户查询"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="channel_freemanage_list" resourceID="08-08-00-00-00-00" ismenu="true" title="渠道费维护"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="bank_file_list" resourceID="08-09-00-00-00-00" ismenu="true" title="充值提现对账"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="transfer_account_list" resourceID="08-10-00-00-00-00" ismenu="true" title="通用转账"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="EarlyRedeemLoanManage_list" resourceID="08-11-00-00-00-00" ismenu="true" title="提前赎回放款"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="webQuery_status_list" resourceID="08-12-00-00-00-00" ismenu="true" title="web版交易状态查询"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="borrow_servicecharge_list" resourceID="08-13-00-00-00-00" ismenu="true" title="通用借款人划扣"  imageUrl="" url="#" target="_self" mapClass=""/>
-	</siteMapNode> 
-	
-	
-	<!--(理财计划管理)-->
-	<siteMapNode id="financialPlanningManagement" resourceID="09-00-00-00-00-00" ismenu="true" title="理财计划管理" imageUrl="" url="#" fixed="false" mapClass="icon-leaf">
-	  <siteMapNode id="financial_planning_category_list" resourceID="09-01-00-00-00-00" ismenu="true" title="理财计划类别管理"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="financial_planning_project_list" resourceID="09-02-00-00-00-00" ismenu="true" title="理财计划项目管理"  imageUrl="" url="#" target="_self" mapClass=""/>
-	</siteMapNode> 
-	
-	<!--(推荐管理)-->
-	<siteMapNode id="recommendManagement" resourceID="10-00-00-00-00-00" ismenu="true" title="推荐管理" imageUrl="" url="#" fixed="false" mapClass="icon-laptop">
-	  <siteMapNode id="referee_list" resourceID="10-01-00-00-00-00" ismenu="true" title="推荐人列表"  imageUrl="" url="#" target="_self" mapClass=""/>
-	  <siteMapNode id="recommended_awards_list" resourceID="10-02-00-00-00-00" ismenu="true" title="推荐奖励发放"  imageUrl="" url="#" target="_self" mapClass=""/>
-	</siteMapNode> 
-	
-	<!--(平台账户管理)-->
-	<siteMapNode id="platformAccountManagement" resourceID="11-00-00-00-00-00" ismenu="true" title="平台账户管理" imageUrl="" url="#" fixed="false" mapClass="icon-group">
-	  <siteMapNode id="platform_account_list" resourceID="11-01-00-00-00-00" ismenu="true" title="平台账户查询"  imageUrl="" url="#" target="_self" mapClass=""/>
-	</siteMapNode> 
-	
-	<!--(限制管理)-->
-	<siteMapNode id="restrictManagement" resourceID="12-00-00-00-00-00" ismenu="true" title="限制管理" imageUrl="" url="#" fixed="false" mapClass="icon-star">
-	  <siteMapNode id="risk_white_list" resourceID="12-01-00-00-00-00" ismenu="true" title="出借风控白名单"  imageUrl="" url="#" target="_self" mapClass=""/>
-	   <siteMapNode id="invest_wind_list" resourceID="12-01-00-00-00-00" ismenu="true" title="出借风控管理"  imageUrl="" url="#" target="_self" mapClass=""/>
-	</siteMapNode> 
-	
+
 	  <!-- (系统管理) -->
   <siteMapNode id="mapSystem" resourceID="98-00-00-00-00-00" ismenu="true" title="系统管理" imageUrl="" url="" fixed="false" mapClass="icon-gears ">
     <siteMapNode id="mapOrgan_List" resourceID="98-01-00-00-00-00" ismenu="true" title="组织管理"  imageUrl="" url="/system/organ/list" target="_self" mapClass="icon-tab1"/>

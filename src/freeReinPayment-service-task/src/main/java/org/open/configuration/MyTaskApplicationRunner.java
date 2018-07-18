@@ -42,8 +42,10 @@ public class MyTaskApplicationRunner implements ApplicationRunner {
                 String taskName = task.getTaskName();
                 String startTime = task.getExecuteTime();
                 Class<ITaskService> aclass = TaskEnum.Task.getClass(taskName);
-                ITaskService taskService = this.context.getBean(aclass);
-                taskService.startTask(startTime);
+                if(null != aclass){
+                    ITaskService taskService = this.context.getBean(aclass);
+                    taskService.startTask(startTime);
+                }
             }
         }
     }

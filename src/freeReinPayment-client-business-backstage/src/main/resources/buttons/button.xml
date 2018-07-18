@@ -89,4 +89,5 @@
   </buttons>
 
   <references id="system" path="systemButton.xml"/>
+  <references id="task" path="taskButton.xml"/>
 </root>

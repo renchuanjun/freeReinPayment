@@ -33,6 +33,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.xuanyuan</groupId>
+			<artifactId>freeReinPayment-model-task</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.xuanyuan</groupId>
 			<artifactId>freeReinPayment-utils</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

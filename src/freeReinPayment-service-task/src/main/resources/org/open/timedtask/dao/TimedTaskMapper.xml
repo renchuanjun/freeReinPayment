@@ -7,12 +7,13 @@
     <result column="execute_time" property="executeTime" jdbcType="VARCHAR" />
     <result column="is_start" property="isStart" jdbcType="INTEGER" />
     <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    task_id, task_name, execute_time, is_start
+    task_id, task_name, execute_time, is_start, remarks, name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from timed_task
     where task_id = #{taskId,jdbcType=INTEGER}
@@ -22,10 +23,12 @@
     where task_id = #{taskId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.open.task.model.TimedTask" >
-    insert into timed_task (task_id, task_name, execute_time, 
-      is_start)
-    values (#{taskId,jdbcType=INTEGER}, #{taskName,jdbcType=VARCHAR}, #{executeTime,jdbcType=VARCHAR}, 
-      #{isStart,jdbcType=INTEGER})
+    insert into timed_task (task_id, task_name, execute_time,
+      is_start, remarks, name
+      )
+    values (#{taskId,jdbcType=INTEGER}, #{taskName,jdbcType=VARCHAR}, #{executeTime,jdbcType=VARCHAR},
+      #{isStart,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.open.task.model.TimedTask" >
     insert into timed_task
@@ -42,6 +45,12 @@
       <if test="isStart != null" >
         is_start,
       </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="taskId != null" >
@@ -55,6 +64,12 @@
       </if>
       <if test="isStart != null" >
         #{isStart,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -70,6 +85,12 @@
       <if test="isStart != null" >
         is_start = #{isStart,jdbcType=INTEGER},
       </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
     </set>
     where task_id = #{taskId,jdbcType=INTEGER}
   </update>
@@ -77,7 +98,9 @@
     update timed_task
     set task_name = #{taskName,jdbcType=VARCHAR},
       execute_time = #{executeTime,jdbcType=VARCHAR},
-      is_start = #{isStart,jdbcType=INTEGER}
+      is_start = #{isStart,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR}
     where task_id = #{taskId,jdbcType=INTEGER}
   </update>
 
@@ -112,4 +135,38 @@
     </set>
     where task_name = #{taskName,jdbcType=VARCHAR}
   </update>
+
+  <!--分页-->
+  <select id="selectTimedTaskByPage" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    timed_task
+    <where>
+      <if test="timedTask.taskName != null and  timedTask.taskName != ''">
+        AND task_name LIKE
+        CONCAT('%',#{timedTask.taskName,jdbcType=VARCHAR},'%'),
+      </if>
+      <if test="timedTask.isStart != null and  timedTask.isStart != ''">
+        and is_start = #{timedTask.isStart,jdbcType=INTEGER},
+      </if>
+    </where>
+    ORDER BY ${args.sortOrderName}
+    limit #{args.pageIndex,jdbcType=INTEGER}
+    ,#{args.pageSize,jdbcType=INTEGER};
+  </select>
+
+  <select id="selectTimedTaskByPageCount" resultType="java.lang.Integer">
+    SELECT  COUNT(task_id)
+    FROM timed_task
+    <where>
+      <if test="timedTask.taskName != null and  timedTask.taskName != ''">
+        AND task_name LIKE
+        CONCAT('%',#{timedTask.taskName,jdbcType=VARCHAR},'%'),
+      </if>
+      <if test="timedTask.isStart != null and  timedTask.isStart != ''">
+        and is_start = #{timedTask.isStart,jdbcType=INTEGER},
+      </if>
+    </where>
+  </select>
 </mapper>

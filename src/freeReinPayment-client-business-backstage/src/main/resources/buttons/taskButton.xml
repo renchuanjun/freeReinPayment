@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<task>
+  <!--人员管理 开始-->
+  <page key="demo_task" url="" titile="人员管理" pageResourceID="03-01-00-00-00-00">
+    <group groupid="group1" title="操作">
+      <item id="demo_taskLook" title="查看" btnID="Look" resourceID="03-01-00-00-00-01" fixed="false"  enable="true" onClientClick=""/>
+      <item id="demo_taskEdit" title="编辑 " btnID="Edit" resourceID="03-01-00-00-00-02" fixed="false"  enable="true" onClientClick="return edit();"/>
+      <item id="demo_taskStop" title="停止" btnID="Stop" resourceID="03-01-00-00-00-03" fixed="false"  enable="true" onClientClick="return stopTask();"/>
+      <item id="demo_taskRestart" title="重启" btnID="Restart" resourceID="03-01-00-00-00-04" fixed="false"  enable="true"  onClientClick="return restartTask();"/>
+      <item id="demo_taskReset" title="重置时间" btnID="Reset" resourceID="03-01-00-00-00-05" fixed="false"  enable="true"  onClientClick="return resetTask();"/>
+    </group>
+  </page>
+</task>

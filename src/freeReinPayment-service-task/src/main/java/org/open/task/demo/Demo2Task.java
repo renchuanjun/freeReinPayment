@@ -26,11 +26,12 @@ public class Demo2Task extends TaskService {
     @Override
     public void startTask(String time) {
         if (this.configProperties.isTask()) {//是否启动定时器
-
+            System.out.println("定时任务2"+(future == null));
             future = threadPoolTaskScheduler.schedule(() -> {
                 System.out.println("定时任务2启动,定时规则 :" + time);
+                System.out.println("定时任务2"+threadPoolTaskScheduler.toString());
             }, new CronTrigger(time));
-            System.out.println("定时任务2"+future.toString());
+
         }
     }
 }

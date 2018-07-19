@@ -28,6 +28,7 @@ public class Demo1Task extends TaskService {
         if (this.configProperties.isTask()) {//是否启动定时器
             future = threadPoolTaskScheduler.schedule(() -> {
                 System.out.println("定时任务1启动,定时规则 :" + time);
+                System.out.println("定时任务1"+threadPoolTaskScheduler.toString());
             }, new CronTrigger(time));
             System.out.println("定时任务1"+future.toString());
         }

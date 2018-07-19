@@ -27,6 +27,7 @@ public abstract class TaskService implements ITaskService {
     public void stopTask() {
         if (this.future != null) {
             this.future.cancel(true);
+            System.gc();
         }
     }
 
@@ -48,6 +49,7 @@ public abstract class TaskService implements ITaskService {
      */
     @Override
     public void resetTask(String time) {
+        System.gc();
         stopTask();
         startTask(time);
     }

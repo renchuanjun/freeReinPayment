@@ -12,6 +12,16 @@ public class ConfigProperties extends BasisConfigProperties{
 
     private boolean task;
 
+    private Integer poolSize;
+
+    public Integer getPoolSize() {
+        return poolSize;
+    }
+
+    public void setPoolSize(Integer poolSize) {
+        this.poolSize = poolSize;
+    }
+
     public boolean isTask() {
         return task;
     }

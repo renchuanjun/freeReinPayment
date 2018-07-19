@@ -36,7 +36,12 @@ public class TaskServiceApp {
      */
     @Bean
     public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
-        return new ThreadPoolTaskScheduler();
+        ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
+        threadPoolTaskScheduler.setPoolSize(this.configProperties.getPoolSize());
+        threadPoolTaskScheduler.setAwaitTerminationSeconds(Integer.MAX_VALUE);
+        // 等待所有线程执行完
+        threadPoolTaskScheduler.setWaitForTasksToCompleteOnShutdown(true);
+        return threadPoolTaskScheduler;
     }
 
     /*@Bean

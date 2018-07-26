@@ -1,22 +1,17 @@
 package org.open.fileter;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Method;
-import java.nio.charset.Charset;
-import java.util.Map;
 
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.HttpServletRequest;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
-
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.http.HttpServletRequestWrapper;
-import com.netflix.zuul.http.ServletInputStreamWrapper;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Component
 public class MyFilter extends ZuulFilter {
@@ -27,7 +22,7 @@ public class MyFilter extends ZuulFilter {
 	public Object run() {
 		try {
 			RequestContext ctx = RequestContext.getCurrentContext();  
-	        HttpServletRequest request = ctx.getRequest();  
+	        HttpServletRequest request = ctx.getRequest();
 	        System.out.println(String.format("%s AccessUserNameFilter request to %s", request.getMethod(), request.getRequestURL().toString()));
 	        String username = request.getParameter("name");
 	        InputStream in = ctx.getRequest().getInputStream();

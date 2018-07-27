@@ -10,6 +10,7 @@
 		<module>freeReinPayment-gateway</module>
 		<module>freeReinPayment-hystrix</module>
 		<module>freeReinPayment-sleuth</module>
+		<module>freeReinPayment-core</module>
 		<module>freeReinPayment-client-basis</module>
 		<module>freeReinPayment-client-business-backstage</module>
 		<module>freeReinPayment-model-basis</module>
@@ -19,7 +20,6 @@
 		<module>freeReinPayment-service-common</module>
 		<module>freeReinPayment-service-task</module>
 		<module>freeReinPayment-utils</module>
-
   </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

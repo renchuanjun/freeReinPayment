@@ -1,17 +1,25 @@
 package org.open.fileter;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+
+import com.netflix.zuul.http.ServletInputStreamWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StreamUtils;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.netflix.zuul.http.HttpServletRequestWrapper;
+import org.springframework.util.StreamUtils;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+
+import static com.netflix.zuul.context.RequestContext.getCurrentContext;
+import static org.springframework.util.ReflectionUtils.rethrowRuntimeException;
 
 @Component
 public class MyFilter extends ZuulFilter {
@@ -21,28 +29,35 @@ public class MyFilter extends ZuulFilter {
 	@Override
 	public Object run() {
 		try {
-			RequestContext ctx = RequestContext.getCurrentContext();  
-	        HttpServletRequest request = ctx.getRequest();
-	        System.out.println(String.format("%s AccessUserNameFilter request to %s", request.getMethod(), request.getRequestURL().toString()));
-	        String username = request.getParameter("name");
-	        InputStream in = ctx.getRequest().getInputStream();
-	        String body = StreamUtils.copyToString(in, Charset.forName("UTF-8")); 
-	        ctx.setRequest(new HttpServletRequestWrapper(request) {
-//	        	@Override  
-//	            public ServletInputStream getInputStream() throws IOException {  
-//	              return new ServletInputStreamWrapper(reqBodyBytes);  
-//	            }  
-//	            @Override  
-//	            public int getContentLength() {  
-//	              return reqBodyBytes.length;  
-//	            }  
-//	            @Override  
-//	            public long getContentLengthLong() {  
-//	              return reqBodyBytes.length;  
-//	            }  
-	        });
-		} catch (Exception e) {
-			// TODO: handle exception
+			RequestContext context = getCurrentContext();
+			InputStream in = (InputStream) context.get("requestEntity");
+			if (in == null) {
+				in = context.getRequest().getInputStream();
+			}
+			String body = StreamUtils.copyToString(in, Charset.forName("UTF-8"));
+			System.out.println(body);
+			body = body.replace("张三","李四");
+			System.out.println(body);
+			byte[] bytes = body.getBytes("UTF-8");
+			context.setRequest(new HttpServletRequestWrapper(getCurrentContext().getRequest()) {
+				@Override
+				public ServletInputStream getInputStream() throws IOException {
+					return new ServletInputStreamWrapper(bytes);
+				}
+
+				@Override
+				public int getContentLength() {
+					return bytes.length;
+				}
+
+				@Override
+				public long getContentLengthLong() {
+					return bytes.length;
+				}
+			});
+		}
+			catch (IOException e) {
+			rethrowRuntimeException(e);
 		}
         return null;
 	}
@@ -56,7 +71,7 @@ public class MyFilter extends ZuulFilter {
 	@Override
 	public int filterOrder() {
 		// TODO Auto-generated method stub
-		return 0;
+		return -1;
 	}
 
 	@Override

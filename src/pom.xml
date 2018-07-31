@@ -19,6 +19,10 @@
 		<module>freeReinPayment-service-basis</module>
 		<module>freeReinPayment-service-common</module>
 		<module>freeReinPayment-service-task</module>
+		<module>freeReinPayment-service-demo</module>
+		<module>freeReinPayment-jpa-demo1</module>
+		<module>freeReinPayment-jpa-demo2</module>
+		<module>freeReinPayment-jpa-demo3</module>
 		<module>freeReinPayment-utils</module>
   </modules>
 	<parent>

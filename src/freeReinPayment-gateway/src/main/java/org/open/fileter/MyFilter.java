@@ -15,7 +15,6 @@ import com.netflix.zuul.context.RequestContext;
 import org.springframework.util.StreamUtils;
 
 import javax.servlet.ServletInputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 import static com.netflix.zuul.context.RequestContext.getCurrentContext;
@@ -71,7 +70,7 @@ public class MyFilter extends ZuulFilter {
 	@Override
 	public int filterOrder() {
 		// TODO Auto-generated method stub
-		return -1;
+		return 0;
 	}
 
 	@Override

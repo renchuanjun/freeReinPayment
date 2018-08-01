@@ -73,7 +73,6 @@ public class RabbitmqConfig {
     @Bean
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate template = new RabbitTemplate(connectionFactory());
-
         return template;
     }
 

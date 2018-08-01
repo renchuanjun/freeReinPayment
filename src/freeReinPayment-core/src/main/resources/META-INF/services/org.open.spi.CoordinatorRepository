@@ -1,0 +1,2 @@
+org.open.spi.repository.JdbcCoordinatorRepository
+org.open.spi.repository.MongoCoordinatorRepository

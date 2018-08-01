@@ -7,7 +7,6 @@
 		<groupId>org.xuanyuan</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
 	<groupId>org.xuanyuan</groupId>
 	<artifactId>freeReinPayment-utils</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -16,7 +15,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -105,7 +103,6 @@
 			<artifactId>camel-jackson</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-
 		<!-- 爬虫HTML解析工具 <dependency> <groupId>org.jsoup</groupId> <artifactId>jsoup</artifactId> 
 			<version>1.10.3</version> </dependency> <dependency> <groupId>org.apache.httpcomponents</groupId> 
 			<artifactId>httpclient</artifactId> <version>4.5.3</version> </dependency> -->

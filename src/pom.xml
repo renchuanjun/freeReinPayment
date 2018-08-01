@@ -12,13 +12,14 @@
 		<module>freeReinPayment-sleuth</module>
 		<module>freeReinPayment-core</module>
 		<module>freeReinPayment-client-basis</module>
+		<module>freeReinPayment-service-basis</module>
+		<module>freeReinPayment-jpa-basis</module>
 		<module>freeReinPayment-client-business-backstage</module>
 		<module>freeReinPayment-model-basis</module>
 		<module>freeReinPayment-model-common</module>
 		<module>freeReinPayment-model-task</module>
-		<module>freeReinPayment-service-basis</module>
 		<module>freeReinPayment-service-common</module>
-		<module>freeReinPayment-service-task</module>
+		<module>freeReinPayment-task</module>
 		<module>freeReinPayment-service-demo</module>
 		<module>freeReinPayment-jpa-demo1</module>
 		<module>freeReinPayment-jpa-demo2</module>

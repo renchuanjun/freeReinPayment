@@ -2,17 +2,20 @@ package org.open;
 
 
 
-import org.open.listener.MyApplicationEnvironmentPreparedEventListener;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.core.io.ResourceLoader;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
-@EnableDiscoveryClient //该注解能激活Eureka中的DiscoveryClient实现，才能实现Controller中对服务信息的输出
+
+
 @SpringBootApplication //是一个spring boot项目
+@EnableDiscoveryClient //注解来添加发现服务能力
+@EnableFeignClients //注解开启Feign功能
 @EnableAutoConfiguration
 @EnableConfigurationProperties({ConfigProperties.class})
 public class DemoServiceApp {
@@ -20,13 +23,11 @@ public class DemoServiceApp {
     @Autowired
     private ConfigProperties configProperties;
 
-    @Autowired
-    private ResourceLoader resourceLoader;
+//    @Autowired
+//    private ResourceLoader resourceLoader;
 
     public static void main(String[] args) throws Exception {
-        SpringApplicationBuilder builder = new SpringApplicationBuilder(DemoServiceApp.class);
-        builder.listeners(new MyApplicationEnvironmentPreparedEventListener());
-        builder.web(true).run(args);
+        SpringApplication.run(DemoServiceApp.class, args);
     }
 
 

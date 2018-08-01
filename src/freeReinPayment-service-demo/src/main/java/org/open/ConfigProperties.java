@@ -1,5 +1,6 @@
 package org.open;
 
+import org.open.config.BaseConfigProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -7,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @create 2018-05-23 11:56
  **/
 @ConfigurationProperties(prefix="config")
-public class ConfigProperties extends BasisConfigProperties{
+public class ConfigProperties extends BaseConfigProperties {
 
     private String publicKey;
     private boolean jdbcAES;

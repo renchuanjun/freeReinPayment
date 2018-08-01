@@ -1,8 +1,7 @@
 package org.open.configuration;
 
-import org.open.BasisConfigProperties;
+
 import org.open.ConfigProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -10,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 /**
  * Created by lenovo on 2017/4/13.
  */
-@EnableConfigurationProperties({BasisConfigProperties.class})
+@EnableConfigurationProperties({ConfigProperties.class})
 @Configuration
 public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
 

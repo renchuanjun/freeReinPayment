@@ -8,9 +8,9 @@
 	<version>0.0.1-SNAPSHOT</version>
   </parent>
   <groupId>org.xuanyuan</groupId>
-  <artifactId>freeReinPayment-service-task</artifactId>
+  <artifactId>freeReinPayment-task</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>fuqinfinance-service-task</name>
+  <name>freeReinPayment-task</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -74,8 +74,7 @@
   </dependencyManagement>
 
   <build>
-    <finalName>fuqinfinance-service-task</finalName>
-
+    <finalName>freeReinPayment-task</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>

@@ -1,5 +1,8 @@
 package org.open.demo.api;
 
+import org.open.annotation.MyTransactional;
+import org.open.annotation.TransactionalRoleEnum;
+import org.open.annotation.TransactionalTypeEnum;
 import org.open.demo.hystrix.Demo2ApiHystrix;
 import org.open.model.FQParam2;
 import org.open.model.FQResult;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface IDemo2Api {
     
     @RequestMapping(value = "/jpa2/demo", method = RequestMethod.POST)
+    @MyTransactional(destination = "demo" ,role = TransactionalRoleEnum.PROVIDER)
     FQResult<Object> getJpa2Demo(@RequestBody FQParam2<String, Object> hnaParam);
 
 

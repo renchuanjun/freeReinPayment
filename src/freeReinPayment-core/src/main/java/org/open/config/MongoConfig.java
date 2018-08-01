@@ -25,7 +25,7 @@ import lombok.Data;
  * @author xiaoyu
  */
 @Data
-public class MythMongoConfig {
+public class MongoConfig {
 
     /**
      * mongo数据库设置.

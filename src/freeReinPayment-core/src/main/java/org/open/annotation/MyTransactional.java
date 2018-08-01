@@ -32,6 +32,4 @@ public @interface MyTransactional {
     TransactionalRoleEnum [] role() default {};
 
 
-
-
 }

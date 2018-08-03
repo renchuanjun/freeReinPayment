@@ -2,11 +2,9 @@ package org.open.annotation;
 
 import org.open.enums.TransactionalRoleEnum;
 import org.open.enums.TransactionalTypeEnum;
+import org.springframework.web.bind.annotation.Mapping;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * @author 任传君

@@ -1,3 +1,4 @@
+/*
 package org.open.demo.api;
 
 
@@ -9,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+*/
 /**
  * @author 任传君
  * @create 2018-07-31 16:31
- **/
+ **//*
+
 @FeignClient(value = "${jpa.demo3}" ,fallback= Demo3ApiHystrix.class)
 public interface IDemo3Api {
     
@@ -22,3 +25,4 @@ public interface IDemo3Api {
 
 
 }
+*/

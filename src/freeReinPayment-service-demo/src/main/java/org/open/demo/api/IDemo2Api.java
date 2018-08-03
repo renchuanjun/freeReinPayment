@@ -1,3 +1,4 @@
+/*
 package org.open.demo.api;
 
 
@@ -8,16 +9,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+*/
 /**
  * @author 任传君
  * @create 2018-07-31 16:31
- **/
+ **//*
+
 //@FeignClient(value = "${jpa.demo2}" ,fallback= Demo2ApiHystrix.class)
-public interface IDemo2Api {
+//public interface IDemo2Api {
     
-    @RequestMapping(value = "/jpa2/demo", method = RequestMethod.POST)
+//    @RequestMapping(value = "/jpa2/demo", method = RequestMethod.POST)
 //    @MyTransactional(destination = "demo" ,role = TransactionalRoleEnum.PROVIDER)
-    FQResult<Object> getJpa2Demo(@RequestBody FQParam2<String, Object> hnaParam);
+//    FQResult<Object> getJpa2Demo(@RequestBody FQParam2<String, Object> hnaParam);
 
 
 }
+*/

@@ -1,4 +1,4 @@
-package org.open.feign;
+package org.open.feigns;
 
 
 import feign.Feign;
@@ -14,16 +14,16 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class MyRestTemplateConfiguration {
 
-//    @Bean
-//    @Scope("prototype")
-//    public Feign.Builder feignBuilder() {
-//        Feign.Builder builder = Feign.builder();
-//        MyRestTemplateInterceptor myRestTemplateInterceptor = new MyRestTemplateInterceptor();
-//        builder = builder.requestInterceptor(myRestTemplateInterceptor);
-//        InvocationHandlerFactory invocationHandlerFactory = invocationHandlerFactory();
-//        builder.invocationHandlerFactory(invocationHandlerFactory);
-//        return builder;
-//    }
+    @Bean
+    @Scope("prototype")
+    public Feign.Builder feignBuilder() {
+        Feign.Builder builder = Feign.builder();
+        MyRestTemplateInterceptor myRestTemplateInterceptor = new MyRestTemplateInterceptor();
+        builder = builder.requestInterceptor(myRestTemplateInterceptor);
+        InvocationHandlerFactory invocationHandlerFactory = invocationHandlerFactory();
+        builder.invocationHandlerFactory(invocationHandlerFactory);
+        return builder;
+    }
 
     @Bean
     public InvocationHandlerFactory invocationHandlerFactory() {

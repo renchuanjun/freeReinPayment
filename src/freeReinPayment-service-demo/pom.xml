@@ -24,6 +24,11 @@
         </dependency>
         <dependency>
             <groupId>org.xuanyuan</groupId>
+            <artifactId>freeReinPayment-model-basis</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.xuanyuan</groupId>
             <artifactId>freeReinPayment-model-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

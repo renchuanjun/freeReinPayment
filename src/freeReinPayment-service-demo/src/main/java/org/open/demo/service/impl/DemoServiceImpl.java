@@ -1,12 +1,11 @@
 package org.open.demo.service.impl;
 
 import org.open.demo.api.IDemo1Api;
-import org.open.demo.api.IDemo2Api;
-import org.open.demo.api.IDemo3Api;
 import org.open.demo.service.IDemoService;
 import org.open.model.FQResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,7 +26,6 @@ public class DemoServiceImpl implements IDemoService {
 
     @Override
     public FQResult<Object> getDemoService(String id) {
-
         demo1Api.getJpa1Demo(id);
         return null;
     }

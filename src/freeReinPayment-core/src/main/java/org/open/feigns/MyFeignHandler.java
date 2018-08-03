@@ -1,4 +1,4 @@
-package org.open.feign;
+package org.open.feigns;
 
 
 import feign.InvocationHandlerFactory;

@@ -1,4 +1,4 @@
-package org.open.annotation;
+package org.open.enums;
 
 public enum TransactionalRoleEnum {
 

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class Demo1ApiHystrix implements IDemo1Api {
 
     @Override
-    public FQResult<Object> getJpa1Demo(FQParam2<String, Object> hnaParam) {
+    public FQResult<Object> getJpa1Demo(String id) {
         FQResult<Object> fqResult = new FQResult<Object>();
         fqResult.setStateCode("-9999");
         fqResult.setDetailInfo("getTestList-fallback");

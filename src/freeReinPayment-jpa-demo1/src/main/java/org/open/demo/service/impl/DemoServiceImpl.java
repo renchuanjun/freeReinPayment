@@ -1,7 +1,7 @@
 package org.open.demo.service.impl;
 
 import org.open.annotation.MyTransactional;
-import org.open.annotation.TransactionalRoleEnum;
+import org.open.enums.TransactionalRoleEnum;
 import org.open.demo.service.IDemoService;
 import org.open.model.FQResult;
 import org.springframework.stereotype.Service;

@@ -4,6 +4,7 @@ import org.open.demo.service.IDemoService;
 import org.open.model.FQResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,6 +18,7 @@ public class DemoController {
     @Autowired
     private IDemoService demoService;
 
+    @RequestMapping(value = "/savedemo" ,method = RequestMethod.POST)
     public FQResult<Object> saveDemo(String id){
         return this.demoService.saveDemo(id);
     }

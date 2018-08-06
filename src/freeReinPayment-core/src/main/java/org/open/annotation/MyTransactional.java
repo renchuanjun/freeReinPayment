@@ -10,8 +10,10 @@ import java.lang.annotation.*;
  * @author 任传君
  * @create 2018-07-27 16:54
  **/
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
+@Documented
+@Mapping
 public @interface MyTransactional {
 
     /**

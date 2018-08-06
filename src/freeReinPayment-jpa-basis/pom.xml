@@ -40,18 +40,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!--spring cloud 链路器 -->
+        <!--&lt;!&ndash;spring cloud 链路器 &ndash;&gt;
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-sleuth-zipkin</artifactId>
             <version>1.3.0.RELEASE</version>
         </dependency>
-        <!--spring cloud 链路器 -->
+        &lt;!&ndash;spring cloud 链路器 &ndash;&gt;
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-sleuth</artifactId>
             <version>1.3.0.RELEASE</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
     <build>
         <finalName>freeReinPayment-jpa-basis</finalName>

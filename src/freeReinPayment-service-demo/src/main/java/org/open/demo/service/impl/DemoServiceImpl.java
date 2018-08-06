@@ -26,7 +26,10 @@ public class DemoServiceImpl implements IDemoService {
 
     @Override
     public FQResult<Object> getDemoService(String id) {
-        demo1Api.getJpa1Demo(id);
-        return null;
+        FQResult<Object> fqResult = demo1Api.getJpa1Demo(id);
+        if(fqResult.getSuccess()){
+            System.out.println(fqResult.getResult());
+        }
+        return fqResult;
     }
 }

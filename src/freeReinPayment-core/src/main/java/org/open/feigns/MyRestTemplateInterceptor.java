@@ -17,6 +17,8 @@ public class MyRestTemplateInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate template) {
-//        template.header("MYTH_TRANSACTION_CONTEXT", "11");
+//        final MythTransactionContext mythTransactionContext = TransactionContextLocal.getInstance().get();
+//        this.addHeader(template, "Content-Encoding", new String[]{"gzip", "deflate"});
+//        System.out.println("1111");
     }
 }

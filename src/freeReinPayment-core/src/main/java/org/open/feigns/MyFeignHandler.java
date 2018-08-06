@@ -2,17 +2,22 @@ package org.open.feigns;
 
 
 import feign.InvocationHandlerFactory;
+import lombok.Data;
 import org.open.annotation.MyTransactional;
 
 import feign.Target;
+import org.springframework.cloud.netflix.feign.FeignClientsConfiguration;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author 任传君
  * @create 2018-08-02 16:31
  **/
+@Data
 public class MyFeignHandler implements InvocationHandler {
 
     private Target<?> target;
@@ -21,14 +26,17 @@ public class MyFeignHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-
         if (Object.class.equals(method.getDeclaringClass())) {
+            System.err.println("进入MyFeignHandler if 判断");
             return method.invoke(this, args);
-        } else {
-            final MyTransactional myth = method.getAnnotation(MyTransactional.class);
+        }else{
+            final MyTransactional myTransactional = method.getAnnotation(MyTransactional.class);
+            if (Objects.isNull(myTransactional)) {
+                return this.handlers.get(method).invoke(args);
+            }
         }
-        System.out.println("aaaaa");
-        return null;
+
+        return this.handlers.get(method).invoke(args);
     }
 
 

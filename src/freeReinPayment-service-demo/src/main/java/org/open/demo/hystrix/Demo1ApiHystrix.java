@@ -15,6 +15,7 @@ public class Demo1ApiHystrix implements IDemo1Api {
     @Override
     public FQResult<Object> getJpa1Demo(String id) {
         FQResult<Object> fqResult = new FQResult<Object>();
+        System.out.println("进入熔断");
         fqResult.setStateCode("-9999");
         fqResult.setDetailInfo("getTestList-fallback");
         return fqResult;

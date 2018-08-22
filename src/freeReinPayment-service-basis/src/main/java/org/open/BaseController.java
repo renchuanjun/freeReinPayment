@@ -1,5 +1,10 @@
 package org.open;
 
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
+import org.apache.commons.collections.PredicateUtils;
+import org.apache.commons.collections.functors.EqualPredicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -18,37 +23,50 @@ public class BaseController {
 
     @Autowired
     protected HttpServletResponse response;
+    
 
+    protected String outJsonStringSuccess() {
+        return "success";
+    }
 
+    protected String outJsonStringFail() {
+        return "fail";
+    }
 
-/*    protected <T extends HNAResult<K>,K> boolean validate(T t){
-        Boolean rsaTimeOutStatus = null;
-        Boolean rsaSignStatus = null;
-        Boolean rsaFieldNull = null;
-        if (null != request.getAttribute("rsaFieldNull") && (Boolean)request.getAttribute("rsaFieldNull")){
-            //RSA的必填项存在空值
-            t.setDetailInfo("sign,timestamp,module都不能为空");
-            return true;
+    protected String outJsonStringFail(String msg) {
+        return "fail:" + msg;
+    }
+
+    protected String outJsonStringValidateFail() {
+        return "validatefail";
+    }
+
+    /***
+     * 验证form实体
+     * @param result
+     * @return
+     */
+    protected String formValidate(BindingResult result) {
+        List<FieldError> list = result.getFieldErrors();
+        for (FieldError fieldError : list) {
+            System.out.println(fieldError.getField());
+            System.out.println(fieldError.getDefaultMessage());
         }
-        if (null != request.getAttribute("rsaTimeOutStatus")){
-            rsaTimeOutStatus = (Boolean)request.getAttribute("rsaTimeOutStatus");
+        return outJsonStringValidateFail();
 
-            if (rsaTimeOutStatus){
-                //时间戳过期，该请求失效
-                t.setDetailInfo("时间戳过期，该请求无效");
-                return true;
-            }
-        }
+    }
 
-        if (null != request.getAttribute("rsaSignStatus")){
-            rsaSignStatus = (Boolean)request.getAttribute("rsaSignStatus");
-
-            if (!rsaSignStatus){
-                t.setDetailInfo("签名验证失败");
-                return true;
-            }
-        }
-
-        return false;
-    }*/
+    /**
+     * 针对分页拼接成列表对应的json串
+     *
+     * @param total
+     * @param json
+     * @return
+     */
+    protected String SetTableDataJson(int total, String json) {
+        String str = "{\"total\":" + total + ",\"rows\":" + json + "}";
+        return str;
+    }
+    
+  
 }

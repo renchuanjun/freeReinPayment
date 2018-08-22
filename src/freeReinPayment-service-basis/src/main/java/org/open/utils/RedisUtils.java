@@ -15,6 +15,7 @@ public class RedisUtils<K, V> {
 
 	@Autowired
 	private RedisTemplate redisTemplate;
+	
 	/***
 	 * 添加值
 	 * @param key
@@ -27,13 +28,13 @@ public class RedisUtils<K, V> {
 	}
 	
 	/***
-	 * 添加值(默认有效期20分钟)
+	 * 添加值(永久)
 	 * @param key
 	 * @param value
 	 */
 	public <K, V> void put(K key, V value) {
 		ValueOperations<K, V> opsForValue = (ValueOperations<K, V>) redisTemplate.opsForValue();
-		opsForValue.set(key, value,1200000, TimeUnit.MILLISECONDS);
+		opsForValue.set(key, value);
 	}
 	
 	/***

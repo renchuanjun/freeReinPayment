@@ -20,12 +20,7 @@
 
         <dependency>
             <groupId>org.xuanyuan</groupId>
-            <artifactId>freeReinPayment-jpa-basis</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.xuanyuan</groupId>
-            <artifactId>freeReinPayment-core</artifactId>
+            <artifactId>freeReinPayment-model-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -35,7 +30,7 @@
         </dependency>
         <dependency>
             <groupId>org.xuanyuan</groupId>
-            <artifactId>freeReinPayment-service-basis</artifactId>
+            <artifactId>freeReinPayment-jpa-basis</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!--引入spring cloud的相关的应用的jar-->
@@ -67,6 +62,7 @@
     </dependencies>
     <build>
         <finalName>freeReinPayment-jpa-common</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

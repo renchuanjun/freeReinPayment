@@ -4,12 +4,12 @@ import java.util.List;
 
 public class PagerAndOrderByArgs implements java.io.Serializable {
 	public PagerAndOrderByArgs(){
-		currentPage = 0;
-		pageSize = 10;
-		splitPage = true;
-		sortColumn = "createOn";
-		
-	}
+			currentPage = 0;
+			pageSize = 10;
+			splitPage = true;
+			sortColumn = "createOn";
+
+		}
 	
 	private Integer currentPage;
 	

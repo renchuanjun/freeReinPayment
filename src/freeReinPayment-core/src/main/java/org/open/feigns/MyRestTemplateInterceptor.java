@@ -5,6 +5,7 @@ package org.open.feigns;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -15,10 +16,9 @@ import org.springframework.context.annotation.Configuration;
 public class MyRestTemplateInterceptor implements RequestInterceptor {
 
 
+
     @Override
     public void apply(RequestTemplate template) {
-//        final MythTransactionContext mythTransactionContext = TransactionContextLocal.getInstance().get();
-//        this.addHeader(template, "Content-Encoding", new String[]{"gzip", "deflate"});
-//        System.out.println("1111");
+        System.out.println("2222");
     }
 }

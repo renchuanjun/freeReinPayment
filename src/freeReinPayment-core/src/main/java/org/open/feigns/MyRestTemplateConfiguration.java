@@ -3,6 +3,7 @@ package org.open.feigns;
 
 import feign.Feign;
 import feign.InvocationHandlerFactory;
+import feign.auth.BasicAuthRequestInterceptor;
 import feign.hystrix.HystrixFeign;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,16 +16,17 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class MyRestTemplateConfiguration {
 
-//    @Bean
-//    @Scope("prototype")
-//    public Feign.Builder feignBuilder() {
-//        Feign.Builder builder = Feign.builder();
-//        MyRestTemplateInterceptor myRestTemplateInterceptor = new MyRestTemplateInterceptor();
-//        builder = builder.requestInterceptor(myRestTemplateInterceptor);
-//        InvocationHandlerFactory invocationHandlerFactory = invocationHandlerFactory();
-//        builder.invocationHandlerFactory(invocationHandlerFactory);
-//        return builder;
-//    }
+    @Bean
+    @Scope("prototype")
+    public Feign.Builder feignBuilder() {
+        Feign.Builder builders = Feign.builder();
+        MyRestTemplateInterceptor myRestTemplateInterceptor = new MyRestTemplateInterceptor();
+        builders = builders.requestInterceptor(myRestTemplateInterceptor);
+        InvocationHandlerFactory invocationHandlerFactory = invocationHandlerFactory();
+        builders.invocationHandlerFactory(invocationHandlerFactory);
+        HystrixFeign.Builder builder =  HystrixFeign.builder();
+        return builders;
+    }
 
     @Bean
     public InvocationHandlerFactory invocationHandlerFactory() {
@@ -35,4 +37,7 @@ public class MyRestTemplateConfiguration {
             return handler;
         };
     }
+
+
+
 }

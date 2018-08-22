@@ -24,4 +24,9 @@ public class DemoController {
         return "";
     }
 
+    @RequestMapping(value = "/demo2" ,method = RequestMethod.POST)
+    public Object demo2(String id){
+        this.demoService.getDemoService2(id);
+        return "";
+    }
 }

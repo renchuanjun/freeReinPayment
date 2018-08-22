@@ -26,7 +26,6 @@ public class OperategroupController extends BaseController {
 
     @RequestMapping(value = "/list" ,method = RequestMethod.POST)
     public FQResult<PaginationSupport<SysOperategroup>> getSysOperategroupList(@RequestBody FQParam2<SysOperategroup,PagerAndOrderByArgs> hnaParam2){
-
         SysOperategroup operategroup = hnaParam2.getT();
         PagerAndOrderByArgs args = hnaParam2.getK();
         return iOperategroupService.selectSysOperategroupByPage(operategroup,args);

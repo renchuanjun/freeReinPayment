@@ -7,6 +7,7 @@ import org.open.annotation.MyTransactional;
 
 import feign.Target;
 import org.springframework.cloud.netflix.feign.FeignClientsConfiguration;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -18,6 +19,7 @@ import java.util.Objects;
  * @create 2018-08-02 16:31
  **/
 @Data
+@Component
 public class MyFeignHandler implements InvocationHandler {
 
     private Target<?> target;

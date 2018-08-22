@@ -6,10 +6,9 @@ import org.open.demo.hystrix.Demo1ApiHystrix;
 
 import org.open.enums.TransactionalRoleEnum;
 import org.open.enums.TransactionalTypeEnum;
-import org.open.model.FQParam2;
+import org.open.feigns.MyRestTemplateConfiguration;
 import org.open.model.FQResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,5 +23,7 @@ public interface IDemo1Api {
     @MyTransactional(destination = "demo",transactionalType = TransactionalTypeEnum.COERCIVE_IDENTUCAL ,role = TransactionalRoleEnum.START)
     FQResult<Object> getJpa1Demo(String id);
 
-
+    @RequestMapping(value = "/demo1/demo/savedemo2", method = RequestMethod.POST)
+    @MyTransactional(destination = "demo",transactionalType = TransactionalTypeEnum.COERCIVE_IDENTUCAL ,role = TransactionalRoleEnum.START)
+    FQResult<Object> getJpa1Demo2(String id);
 }

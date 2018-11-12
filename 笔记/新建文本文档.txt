@@ -1,0 +1,126 @@
+
+2.精通java 多线程
+3.精通java io
+
+
+
+
+Java线程具有五中基本状态
+
+新建状态（New）：当线程对象对创建后，即进入了新建状态，如：Thread t = new MyThread();
+就绪状态（Runnable）：当调用线程对象的start()方法（t.start();），线程即进入就绪状态。处于就绪状态的线程，只是说明此线程已经做好了准备，随时等待CPU调度执行，
+并不是说执行了t.start()此线程立即就会执行；
+运行状态（Running）：当CPU开始调度处于就绪状态的线程时，此时线程才得以真正执行，即进入到运行状态。注：就     绪状态是进入到运行状态的唯一入口，也就是说，
+线程要想进入运行状态执行，首先必须处于就绪状态中；
+阻塞状态（Blocked）：处于运行状态中的线程由于某种原因，暂时放弃对CPU的使用权，停止执行，此时进入阻塞状态，直到其进入到就绪状态，才 有机会再次被CPU调用以进入到运行状态。
+根据阻塞产生的原因不同，阻塞状态又可以分为三种：
+1.等待阻塞：运行状态中的线程执行wait()方法，使本线程进入到等待阻塞状态；
+2.同步阻塞 -- 线程在获取synchronized同步锁失败(因为锁被其它线程所占用)，它会进入同步阻塞状态；
+3.其他阻塞 -- 通过调用线程的sleep()或join()或发出了I/O请求时，线程会进入到阻塞状态。当sleep()状态超时、join()等待线程终止或者超时、或者I/O处理完毕时，线程重新转入就绪状态。
+死亡状态（Dead）：线程执行完了或者因异常退出了run()方法，该线程结束生命周期。
+
+
+线程池
+①：FixedThreadPool，特点：固定池子中线程的个数。使用静态方法newFixedThreadPool()创建线程池的时候指定线程池个数
+②：CachedThreadPool（弹性缓存线程池），特点：用newCachedThreadPool()方法创建该线程池对象，创建之初里面一个线程都没有，当execute方法或submit方法向线程池提交任务时，
+会自动新建线程；如果线程池中有空余线程，则不会新建；这种线程池一般最多情况可以容纳几万个线程，里面的线程空余60s会被回收。
+③：SingleThreadPool（单线程线程池），特点：池中只有一个线程，如果扔5个任务进来，那么有4个任务将排队；作用是保证任务的顺序执行。
+④：ScheduledThreadpool（定时器线程池）
+newCachedThreadPool创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。
+newFixedThreadPool 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。
+newScheduledThreadPool 创建一个定长线程池，支持定时及周期性任务执行。
+newSingleThreadExecutor 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
+
+public ThreadPoolExecutor(int corePoolSize,
+                              int maximumPoolSize,
+                              long keepAliveTime,
+                              TimeUnit unit,
+                              BlockingQueue<Runnable> workQueue,
+                              ThreadFactory threadFactory)
+
+corePoolSize, 
+       核心线程数会一直存活 及时没有需要执行的任务
+       当线程数小于核心线程数时,即使有空闲线程 ,线程池也会优先创建新线程处理
+       设置allowCoreThreadTimeout=true（默认false）时，核心线程会超时关闭	      
+maximumPoolSize, 线程池中能拥有最多线程数
+keepAliveTime：表示空闲线程的存活时间。
+TimeUnitunit：表示keepAliveTime的单位。
+workQueue：用于缓存任务的阻塞队列
+	ArrayBlockingQueue（int i）:规定大小的BlockingQueue，其构造必须指定大小。其所含的对象是FIFO顺序排序的。
+	LinkedBlockingQueue（）或者（int i）:大小不固定的BlockingQueue，若其构造时指定大小，生成的BlockingQueue有大小限制，
+					不指定大小，其大小有Integer.MAX_VALUE来决定。其所含的对象是FIFO顺序排序的。
+	Synchronousqueue:一个不存储元素的阻塞队列。每个插入操作必须等到另一个线程调用移除操作,否则插入操作一直处于阻塞状态,吞吐量通常要高于 LinkedBlockingQueue
+	PriorityBlockingqueue:一个具有优先级得无限阻塞队列
+
+
+handler：表示当workQueue已满，且池中的线程数达到maximumPoolSize时，线程池拒绝添加新任务时采取的策略。
+	handler一般可以采取以下四种取值。
+	ThreadPoolExecutor.AbortPolicy()   	抛出RejectedExecutionException异常
+	ThreadPoolExecutor.CallerRunsPolicy()	重试添加当前的任务，他会自动重复调用execute()方法 
+	ThreadPoolExecutor.DiscardOldestPolicy()	抛弃最旧的任务（最先提交而没有得到执行的任务）
+	ThreadPoolExecutor.DiscardPolicy()	抛弃当前的任务
+
+使用线程池3的好处:
+	降低资源消耗,通过重复利用自己创建的线程降低线程创建和销毁造成的消耗
+	提高响应速度当任务到大时,人物可以不需要等待现成的创建能立即执行
+	提高线程可管理性,线程是稀缺资源,如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控
+
+
+
+
+
+spring 
+事务的传播行为 
+
+PROPAGION_XXX :事务的传播行为 
+* 保证同一个事务中 
+
+PROPAGATION_REQUIRED 支持当前事务，如果不存在 就新建一个(默认) 
+
+PROPAGATION_SUPPORTS 支持当前事务，如果不存在，就不使用事务 
+
+PROPAGATION_MANDATORY 支持当前事务，如果不存在，抛出异常 
+* 保证没有在同一个事务中 
+
+PROPAGATION_NESTED 如果当前事务存在，则嵌套事务执行
+PROPAGATION_REQUIRES_NEW 如果有事务存在，挂起当前事务，创建一个新的事务 
+
+PROPAGATION_NOT_SUPPORTED 以非事务方式运行，如果有事务存在，挂起当前事务 
+
+PROPAGATION_NEVER 以非事务方式运行，如果有事务存在，抛出异常 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+熟练掌握java集合框架,mysql以及sql 优化
+
+掌握 redis, mycat  
+熟练应用 spring boot ,spring cloud ,Spring  springMVC  mybatis 进行相关开发
+熟悉多线程  nginx 和https相关配置
+能使用JQuery ，js， freemarker ,CSS  bootstrap 前端开发
+熟练运用SVN Git Maven管理工具对项目进行搭建和部署,熟练应用  PowerDesigner进行数据库建模
+简单了解python, jvm, 熟悉linux 常用命令
+

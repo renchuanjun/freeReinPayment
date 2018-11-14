@@ -179,6 +179,114 @@ mysql group by 的 with rollup 用于分组统计 不能 和 order by 一起用(互斥)
 
 
 
+MySQL 体系结构
+默认情况下 mysql 有7组线程 分别是 1个主线程 4组 io 线程1 个锁线程 求个 错误监控线程 purge线程
+
+master thread : 主要负责将脏数据缓存页 刷新导数据文件执行purge操作 触发检查点,合并插入缓冲区
+insert buffer thread: 主要负责插入缓冲去的合并
+read thread : 负责数据库读取操作 可配置多个读线程
+write thread :负责数据库写操作可配置多个写线程
+log thread : 用于将从做日志刷新到logfile中.
+purge thread: mysql5.5 之后用单独的 线程执行purge操作
+错误监控线程 : 主要负责错误监控和错误处理.
+show engine innodb status 命令查看这些线程状态(只能在mysql客户端用)
+
+mysql 内存优化管理及优化
+内存优化原则:
+将尽量多的内存分配给mysql做缓存,但要给操作系统和其他程勋的运行预留足够的内存,否则产生swap页交换,将严重影响系统性能
+myisam的数据文件读取主要依赖系统io缓存,如果有myisam表就要预留更多的内存给操作系统做io缓存
+排序区,链接区等缓存是分配给每个数据库会话(session)专用,其默认值的设置要根据最大链接数配合,如果设置过大,不但浪费内存资源,而且
+在并发链接较高时会导致物理内存耗尽
+
+
+MyISAM 内存优化
+key_buffer_siz 设置
+决定myisam索引块缓存区大小,他直接影响myisam标的存取效率. 可以在配置文件配置 建议至少分配1/4可用内存
+使用多个索引缓存
+mysql通过各session 共享的key buffer 提高了myisam索引存取的性能,但是不能消除session对key buff的竞争.
+为减少session 间对key buffer 的竞争 可引入了多索引缓存的机制,从而可以将不同表的索引缓存到不同key buffer
+创建 新的 key buffer 
+set global hot_cache.key_buffer_size=128*1024
+hot_cache 是 新建索引缓存的名称 ,global 关键字表示新建的缓存对每一个新的链接都有效.
+创建的索引缓存 删除key buffer 
+set global hot_cache.key_buffer_size=0;
+但是不能删除默认的key_buffer(查询 show variables like 'key_buffer_size' ;)
+
+更常见的做法是通过配置文件在mysql启动时自动创建并加载索引缓存:
+key_buff_size=4G
+hot_cache.key_buff_size=2G
+cold_cache.key_buff_size=1G
+init_file=/www/.../mysqld_init.sql
+
+在mysqld_init.sql中,可以通过cache index 命令分配索引缓存, 并用load index init cache 命令来进行索引预加载:
+cache index sales(表) in hot_cache;
+cache index sales2(表) in cold_cache;
+load index into cache sales,sales2;
+
+
+中点插入策略
+所谓"中点插入策略",是对LRU淘汰算法的改进,它将LRU链分成两部分:hot子表和warm子表,当一个索引块读入内存时,先被放到LRU链表的"中点",
+即warm子表的尾部,当达到一定命中次数后,该索引块会被晋升到hot子表的尾部;此后,该数据块在hot子表流转,如果其到达hot子表的头部并超过
+一定时间,他将由hot子表头部降级到warm子表头部;当需要淘汰索引快时,缓存管理程序会选择优先淘汰warm表头部的内存块
+
+可以通过 key_cache_division_limit 来控制大比例的缓存用作warm子表,key_cache_division_limit的默认值是100,意思是全部缓存都放到
+warm子表其实其实也就是不起用"中点插入策略"如果希望用30%的缓存用来cache最热的索引快,可以对key_cache_division_limit做如下设置
+set global key_cache_division_limit = 70
+set global hot_cache.key_cache_division_limit = 70
+
+除调节warm 走标配的比例外,还可以通过key_cache_age_threshold控制数据块由hot子表向warm子表降级的时间,值越小,数据块将越快被降级.
+对于有N个块的索引缓存来说,如果一个在hot子表头部的索引块,在最后 N X key_cache_age_threshold/100 次缓存命准内未被访问过,就会被降级到warm子表.
+
+调整read_buffer_size 和read_rnd_buffer_size
+如果顺序扫描myISAM表,可以增大 read_buffer_size 改善性能 但是 它是每个session独占,默认值太大,就会造成内存浪费.
+myISAM表 如果带有order by 子句的sql ,适当增大read_rnd_buffer_size但是 它是每个session独占,默认值太大,就会造成内存浪费.
+
+InnoDB 缓存机制
+
+innodb 用 一块内存区做IO 缓存池,该缓存池用来做InnoD的索引块和数据块这一点与myisam不同
+内部 innodb 缓存池逻辑上分 free list ,flush list 和LRU list组成  LRU list 是 innodb 也是用的缓存块 他是 innodb buffer pool 的核心
+
+Inoodb 使用的LRU 原理:
+将 LRU list 分为 young sublist 和 old sublist ,数据从磁盘读入时,会将该缓存块插入到LRU list 的"中点",即 old sublist 的头部;讲过一定时间的访问
+(由 innodb_old_blocks_time 系统参数决定),改数据块将会由old sublist 转移到 young sublist的头部,也就是整个LRU list 的头部;
+随着时间的推移,young sublist 和 old sublist中较少的被访问的缓存块将从各自链表的头部逐渐向尾部移动;需要淘汰数据块时,优先从尾部淘汰.
+
+innodb_buffer_pool_size设置
+
+innodb_buffer_pool_size决定innodb 存储引擎表数据和索引数据的最大缓存区大小.innodb_buffer_pool 同时为数据块和索引块提供数据缓存
+innodb_buffer_pool_size值越大,缓存命中率越高,访问InnoDB表需要的磁盘io越少.性能就越高.在一个专用数据库服务器上可以将80%的物理内存分配给
+innodb_buffer_pool
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

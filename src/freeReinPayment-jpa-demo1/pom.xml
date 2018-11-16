@@ -33,11 +33,6 @@
             <artifactId>freeReinPayment-utils</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>org.xuanyuan</groupId>
-            <artifactId>freeReinPayment-service-basis</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
         <!--引入spring cloud的相关的应用的jar-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

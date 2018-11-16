@@ -9,16 +9,16 @@ import java.util.concurrent.ConcurrentHashMap;
  **/
 public class JavaRowLock {
 
-
     private ConcurrentHashMap lockedMap = new ConcurrentHashMap(16);
 
-    private static JavaRowLock javaRowLock = new JavaRowLock();
+    private static JavaRowLock singObj = null;
 
     private JavaRowLock() {
     }
 
-    public static JavaRowLock getJavaRowLock(){
-        return javaRowLock;
+    public synchronized static JavaRowLock getJavaRowLock(){
+        if(null == singObj ) singObj = new JavaRowLock();
+         return singObj ;
     }
 
     public synchronized void lock(String id) throws InterruptedException{

@@ -10,7 +10,6 @@ import org.open.system.dao.SysOperategroupMapper;
 import org.open.system.dao.SysPermissionOperategroupMapper;
 import org.open.system.model.SysOperategroup;
 import org.open.system.model.SysPermissionOperategroup;
-import org.open.system.service.IDeleteConstraintService;
 import org.open.system.service.IOperategroupService;
 import org.open.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;

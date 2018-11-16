@@ -251,18 +251,30 @@ Inoodb 使用的LRU 原理:
 (由 innodb_old_blocks_time 系统参数决定),改数据块将会由old sublist 转移到 young sublist的头部,也就是整个LRU list 的头部;
 随着时间的推移,young sublist 和 old sublist中较少的被访问的缓存块将从各自链表的头部逐渐向尾部移动;需要淘汰数据块时,优先从尾部淘汰.
 
-innodb_buffer_pool_size设置
-
+innodb_buffer_pool_size设置:
 innodb_buffer_pool_size决定innodb 存储引擎表数据和索引数据的最大缓存区大小.innodb_buffer_pool 同时为数据块和索引块提供数据缓存
-innodb_buffer_pool_size值越大,缓存命中率越高,访问InnoDB表需要的磁盘io越少.性能就越高.在一个专用数据库服务器上可以将80%的物理内存分配给
-innodb_buffer_pool
+innodb_buffer_pool_size值越大,缓存命中率越高,访问InnoDB表需要的磁盘io越少.性能就越高.在一个专用数据库服务器上可以将80%的物理内存分配给innodb_buffer_pool
+innodb_old_blocks_time 的设置 参数决定了缓存数据块由old sublist 转移到 young sublist的快慢  当一个 数据块被插入到old sublist 后 至少要停留 innodb_old_blocks_time(毫秒)
+才有被转移到new sublist .
 
+调整缓存池数量,减少内部对缓存池数据结构的挣用:
+mysql内部不同的线程对innodb缓存池在某些时候会出现互斥挣用,会产生性能问题,尤其在高并发和buffer pool 较大情况下 innodb 引入 innodb_buffer_pool_instances 解决这个问题
+innodb 缓存系统会将 innodb_buffer_pool_size 制定大小的缓存评分成innodb_buffer_pool_instances个buffer pool
 
+控制 innodb buffer 刷新,延长数据缓存时间 减缓磁盘io
+在innodb 找不到干净的可用缓存页或检查点被触发等情况下,innodb 的后台线程就会开始吧"脏的缓存页"回写到磁盘中,这个过程叫缓存刷新.
+innodb buffer pool 刷新的快慢取决于2个参数:
+	innodb_max_dirty_pages_pct ,主要控制缓存池中脏页的最大比例,默认75%如果脏页的数量达到或超过该值InnoDB的后台线程就会开启缓存刷新
+	innodb_io_capacity 代表磁盘系统io能力一定程度上表示磁盘每秒可完成io次数,默认200 对于转数较低的磁盘,如7200RPM的磁盘可将值调整到100
+		对于高性能的磁盘可以增大
+innodb 双写策略
+为了解决当mysql服务器发生断电宕机等情况出现数据无法恢复的问题
+innodb doublewrite 机制原理:用系统表空间中的一块连续磁盘空间(100个连续数据页,大小2MB)作为doublewrite buffer, 当进行脏页刷新时,首先将脏页的副本写到系统标的doublewrite buffer
+中,然后调用fsync()刷新操作系统io缓存,确保副本被真正写如磁盘,最后innodb后台io线程将脏页刷新到此案数据文件.
 
-
-
-
-
+调整用户线程服务排序缓存区
+show global status 看到 sort_merge_passes 值很大,可以考虑增加sort_buffer_size 的值增大排序缓冲区 改善带有order by 子句或group子句性能
+对于无法通过索引进行连接查询的操作可以增加 join_buffer_size 的值来改善性能
 
 
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
+import redis.clients.jedis.Jedis;
 
 import java.util.Collection;
 import java.util.List;
@@ -25,6 +26,7 @@ public class RedisUtils<K, V> {
 	public <K, V> void put(K key, V value, long expiredTime) {
 		ValueOperations<K, V> opsForValue = (ValueOperations<K, V>) redisTemplate.opsForValue();
 		opsForValue.set(key, value, expiredTime, TimeUnit.MILLISECONDS);
+
 	}
 	
 	/***

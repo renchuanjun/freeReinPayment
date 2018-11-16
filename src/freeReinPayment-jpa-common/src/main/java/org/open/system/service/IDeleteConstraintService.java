@@ -1,6 +1,11 @@
 package org.open.system.service;
 
 
+import org.open.model.FQResult;
+import org.open.system.model.SysDeleteConstraint;
+
+import java.util.List;
+
 /**
  * Created by lenovo on 2017/8/8.
  */
@@ -13,4 +18,5 @@ public interface IDeleteConstraintService {
      * @return
      */
     boolean getCheckDeletedConstraint(String tableFrom, String[] itemIds);
+
 }

@@ -1,9 +1,11 @@
 package org.open.system.service.impl;
 
 
+import org.open.model.FQParam2;
 import org.open.model.FQResult;
 import org.open.model.PagerAndOrderByArgs;
 import org.open.model.PaginationSupport;
+import org.open.system.api.IOperategroupApi;
 import org.open.system.dao.SysOperategroupMapper;
 import org.open.system.dao.SysPermissionOperategroupMapper;
 import org.open.system.model.SysOperategroup;
@@ -29,23 +31,28 @@ public class OperategroupServiceImpl implements IOperategroupService {
     @Autowired
     private SysOperategroupMapper sysOperategroupMapper;
 
+    private IOperategroupApi operategroupApi;
+
     @Autowired
     private SysPermissionOperategroupMapper sysPermissionOperategroupMapper;
 
-    @Autowired
-    private IDeleteConstraintService iDeleteConstraintService;
+//    @Autowired
+//    private IDeleteConstraintService iDeleteConstraintService;
 
     @Override
     public FQResult<PaginationSupport<SysOperategroup>> selectSysOperategroupByPage(SysOperategroup operategroup, PagerAndOrderByArgs args) {
     	FQResult<PaginationSupport<SysOperategroup>> fqResult = new FQResult<>();
-
         try {
-            List<SysOperategroup> list = sysOperategroupMapper.selectSysOperategroupByPage(operategroup,args);
-            int totalCount = sysOperategroupMapper.selectSysOperategroupByPageCount(operategroup);
-            PaginationSupport<SysOperategroup> paginationSupport = new PaginationSupport<SysOperategroup>(list,totalCount,args.getPageSize(),args.getCurrentPage());
+            FQParam2<SysOperategroup,PagerAndOrderByArgs> fqParam2 = new FQParam2<>();
+            fqParam2.setT(operategroup);
+            fqParam2.setK(args);
+            FQResult<PaginationSupport<SysOperategroup>> fqResults = this.operategroupApi.selectSysOperategroupByPage(fqParam2);
+            PaginationSupport<SysOperategroup> paginationSupport = new PaginationSupport<SysOperategroup>();
+            if (fqResults.getSuccess()){
+                paginationSupport = fqResults.getResult();
+            }
             fqResult.setResult(paginationSupport);
             fqResult.setSuccess(true);
-
         } catch (Exception e) {
         	fqResult.setException(e);
         }

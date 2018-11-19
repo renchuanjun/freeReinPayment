@@ -15,6 +15,7 @@ Mysql ²éÑ¯Óï¾äÖ´ÐÐÖ÷Òª¹ý³Ì
 	²éÑ¯Ô¤´¦Àí,ÓÅ»¯Ïà¹ØÄÚÈÝÖ÷ÒªÊÇ×Ó²éÑ¯ÓÅ»¯
 	Óï·¨Êé±äÎªÂß¼­¹ØÏµ²éÑ¯Ê÷,½ø¶ø±ä³ÉÎïÀí²éÑ¯Ö´ÐÐ¼Æ»®,Ìø³ö×îÓÅ
 	ÒÀ¾Ý×îÓÅ²éÑ¯Ö´ÐÐ¼Æ»®µÄµ½²éÑ¯½á¹û
+
 mysqlÖ÷ÒªµÄÀàºÍÊý¾Ý½á¹¹
 
 mysql²éÑ¯ÓÅ»¯Æ÷µÄÖ÷ÒªÊý¾Ý½á¹¹°üº¬4¸ö·½Ãæ:
@@ -119,6 +120,10 @@ type = null mysql ²»ÓÃËøÒô·ÃÎÊ»òÕßË÷Òý ,Ö±½Ó¾ÍÄÜ¹»µÃµ½½á¹û
 explain extended ÃüÁî ,
 Í¨¹ý ¼ÓÉÏ show warnings ÄÜ¿´µ½sqlÕæÕý±»Ö´ÐÐÖ®Ç°ÓÅ»¯Æ÷×öÁËÄÄÐ©¸ÄÐ´
 SHOW WARNINGS ²é¿´mysqlÓÅ»¯Æ÷¶Ôsql×öÁËÄÄÐ©ÓÅ»¯
+Ê¹ÓÃ¹ý³Ì  explain extended +sql ; SHOW WARNINGS  ;(Navicat for MySQL ÎÞ·¨²é¿´½á¹û)
+
+
+
 
 Í¨¹ý show profile ·ÖÎösql
 
@@ -276,26 +281,52 @@ innodb doublewrite »úÖÆÔ­Àí:ÓÃÏµÍ³±í¿Õ¼äÖÐµÄÒ»¿éÁ¬Ðø´ÅÅÌ¿Õ¼ä(100¸öÁ¬ÐøÊý¾ÝÒ³,´óÐ
 show global status ¿´µ½ sort_merge_passes ÖµºÜ´ó,¿ÉÒÔ¿¼ÂÇÔö¼Ósort_buffer_size µÄÖµÔö´óÅÅÐò»º³åÇø ¸ÄÉÆ´øÓÐorder by ×Ó¾ä»ògroup×Ó¾äÐÔÄÜ
 ¶ÔÓÚÎÞ·¨Í¨¹ýË÷Òý½øÐÐÁ¬½Ó²éÑ¯µÄ²Ù×÷¿ÉÒÔÔö¼Ó join_buffer_size µÄÖµÀ´¸ÄÉÆÐÔÄÜ
 
+redo log ÊÇ±£Ö¤ÊÂÎñacidµÄÖØÒª»úÖÆ
+Êý¾Ý¸üÐÂ innodb ÄÚ²¿Á÷³Ì:
+1)½«Êý¾Ý¶ÁÈëinnodb buffer pool ,²¢¶ÔÏà¹Ø¼ÇÂ¼¼Ó¶ÀÕ¼Ëø.
+2)½«undoÐÅÏ¢Ð´Èëµ½undo±í¿Õ¼äµÄ»Ø¹ö¶ÎÖÐ.
+3)¸ü¸Ä»º´æÒ³ÖÐµÄÊý¾Ý,²¢½«¸üÐÂ¼ÇÂ¼Ð´Èëredo bufferÖÐ.
+4)Ìá½»Ê±,¸ù¾Ýinnod_flush_log_at_trx_commitµÄÉèÖÃ,ÓÃ²»Í¬µÄ·½Ê½½«redobufferÖÐµÄ¸üÐÂ¼ÇÂ¼Ë¢ÐÂµ½innodb redo log file,È»ºóÊÍ·Å¶ÀÕ¼Ëø.
+5)×îºó,ºóÌ¨ioÏß³Ì¸ù¾ÝÐèÒªÔñÊ±»ú½«»º´æÖÐ¸üÐÂ¹ýµÄÊý¾ÝË¢ÐÂµ½´ÅÅÌÎÄ¼þÖÐ
+
+innod_flush_log_at_trx_commit :
+¿ØÖÆredo bufferÖÐ¸üÐÂµÄ¼ÇÂ¼Ð´Èëµ½ÈÕÖ¾ÎÄ¼þºÍ½«ÈÕÖ¾ÎÄ¼þË¢Èë´ÅÅÌµÄ²Ù×÷Ê±»ú
+Èç¹ûÎª 0 :ÔÚÊÂÎñÌá½»Ê±,innodb²»»áÁ¢¼´Ë¢ÐÂ¶øÊÇÃ¿Ãë´¥·¢Ò»´Î»ØÐ´´ÅÅÌ²Ù×÷,²¢µ÷ÓÃfsyncË¢ÐÂio»º´æ
+Èç¹ûÎª 1 :ÊÂÎñÌá½»Á¢¼´½«redo»º´æ»ØÐ´µ½ÈÕÖ¾ÎÄ¼þ,²¢µ÷ÓÃfsyncË¢ÐÂio»º´æ(Ä¬ÈÏ)
+Èç¹ûÎª 2 :ÊÂÎñÌá½»Ê±innodbÁ¢¼´½«»º´æÖÐµÄredo»ØÐ´µ½ÈÕÖ¾ÎÄ¼þµ«²¢²»ÂíÉÏË¢ÐÂio»º´æ,¶øÊÇÒ»ÃëÖ»×öÒ»´Îio»º´æË¢ÐÂ²Ù×÷
+
+innodb_log_buffer_size:
+¾ö¶¨innodbÖØ×öÈÕÖ¾»º´æ³Ø´óÐ¡,Ä¬ÈÏ8MB. ¶ÔÓÚ´óÅúÁ¿¸üÐÂÀ´Ëµ¿ÉÒÔÔö´ó¸ÃÖµ¼õÉÙÈÕÖ¾Ð´´ÅÅÌ²Ù×÷,´Ó¶øÌá¸ßÊÂÎñ´¦ÀíµÄÐÔÄÜ.
+
+max_connections : ×î´ó²¢·¢Á´½ÓÊýÄ¬ÈÏ151
+Èç¹û×´Ì¬±äÁ¿ :connections_errors_max_connections ²»ÎªÁã,²¢ÇÒÒ»ÖÂÔö³¤,¾ÍËµÃ÷²»¶ÏÓÐÇëÇóÁ´½ÓÊ§°Ü¿ÉÒÔ¿¼ÂÇÔö´ó¸ÃÖµ
+
+back_log: 
+¿ØÖÆmysql¼àÌýtcp¶Ë¿ÚÊ±ÉèÖÃµÄ»ýÑ¹ÇëÇóÕ»´óÐ¡Ä¬ÈÏ50×î´ó900,½Ï¶ÌÊ±¼äÊý¾Ý¿â´¦Àí´óÁ¿Á´½ÓÇëÇó¿ÉÒÔ¿¼ÂÇÔö´ó¸ÃÖµ
+
+table_open_cache: 
+¿ØÖÆËùÓÐsqlÖ´ÐÐÏß³Ì¿É´ò¿ª±í»º´æµÄÊýÁ¿.
+thread_cache_size: 
+¿ØÖÆmysql»º´æ¿Í»§·þÎñÏß³ÌÊýÁ¿
+innodb_lock_wait_timeout: 
+¿ØÖÆinnodbÊÂÎñµÈ´ýÐÐËøµÄÊ±¼äÄ¬ÈÏ50ms,³¬¹ýÕâ¸öÊ±¼ä»¹Î´·ÖÅäµ½×ÊÔ´Ôò»á·µ»ØÓ¦ÓÃÊ§°Ü
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1.Ìí¼ÓPRIMARY KEY£¨Ö÷¼üË÷Òý£© 
+mysql>ALTER TABLE `table_name` ADD PRIMARY KEY ( `column` ) 
+2.Ìí¼ÓUNIQUE(Î¨Ò»Ë÷Òý) 
+mysql>ALTER TABLE `table_name` ADD UNIQUE ( `column` ) 
+3.Ìí¼ÓINDEX(ÆÕÍ¨Ë÷Òý) 
+mysql>ALTER TABLE `table_name` ADD INDEX index_name ( `column` ) 
+4.Ìí¼ÓFULLTEXT(È«ÎÄË÷Òý) 
+mysql>ALTER TABLE `table_name` ADD FULLTEXT ( `column`) 
+5.Ìí¼Ó¶àÁÐË÷Òý 
+mysql>ALTER TABLE `table_name` ADD INDEX index_name ( `column1`, `column2`, `column3` )
+6.mysql´´½¨Ë÷ÒýµÄÊ±ºòÖ¸¶¨Ë÷Òý³¤¶È
+CREATE INDEX index_name ON table_name (column_name(length), clolumn_name(length)¡­)£»
+---------------------------------------------------------------mysqlÕûÀí-----------------------------------------------------------------------------------------------------
+Ò») »ù´¡ÖªÊ¶:
 
 
 

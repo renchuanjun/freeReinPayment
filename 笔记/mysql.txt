@@ -1,4 +1,16 @@
-Mysql 查询执行过程
+---------------------------------------------------------------mysql整理-----------------------------------------------------------------------------------------------------
+一) 基础知识:
+MySQL 体系结构:
+默认情况下 mysql 有7组线程 分别是 1个主线程 4组 io 线程1 个锁线程 求个 错误监控线程 purge线程
+	master thread : 主要负责将脏数据缓存页 刷新导数据文件执行purge操作 触发检查点,合并插入缓冲区
+	insert buffer thread: 主要负责插入缓冲区的合并
+	read thread : 负责数据库读取操作 可配置多个读线程
+	write thread :负责数据库写操作可配置多个写线程
+	log thread : 用于将从做日志刷新到logfile中.
+	purge thread: mysql5.5 之后用单独的 线程执行purge操作
+错误监控线程 : 主要负责错误监控和错误处理.
+show engine innodb status 命令查看这些线程状态(只能在mysql客户端用)
+Mysql 查询执行过程:
  1.语法分析阶段
 	将sql语法经过词法和语法分析后转化为一个查询树 传给优化器,并对sql表达的语义进行检查
  2.生成逻辑查询执行计划
@@ -9,101 +21,60 @@ Mysql 查询执行过程
 	优化器对各个链接的表进行排序,然后求解多连接的最优路径,对每个关系尽量利用索引计算代价找出最小路径进行保存
  4.执行查询执行计划
 	吧查询计划传到执行器进行执行
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Mysql 查询语句执行主要过程
-	sql语句输入变为语法查询树
-	查询预处理,优化相关内容主要是子查询优化
-	语法书变为逻辑关系查询树,进而变成物理查询执行计划,跳出最优
-	依据最优查询执行计划的到查询结果
-
-mysql主要的类和数据结构
-
-mysql查询优化器的主要数据结构包含4个方面:
-	1.查询树
-	2.查询基本对象
-	3.连接相关的最像与执行计划
-	4.代价估算
-查询树 : 累的实例保存了一条sql语句被分解后的句子内容
-基本对象: 和查询优化相关的有 关系 索引 链接表 等
-	(关系<表>)存放查询优化阶段需要的信息也有其他阶段用到的信息
-	(索引) 定义了索引的类型和索引的关键信息 通过枚举定义了索引类 :主键索引 唯一索引 多重索引 全文索引 空间索引 外检索引
-	索引算法 : B-tree算法 (默认)  R-tree算法,用于空间搜索   HASH算法 ,用于堆表索引  全文索引 用于MYisan存储引擎的表
-连接相关的最像与执行计划 : mysql查询优化相关的链接对象主要有连接类(join),约束条件(Item) ,位置 等
-普通索引：最基本的索引，没有任何限制
-唯一索引：与"普通索引"类似，不同的就是：索引列的值必须唯一，但允许有空值。
-主键索引：它 是一种特殊的唯一索引，不允许有空值。 
-全文索引：仅可用于 MyISAM 表，针对较大的数据，生成全文索引很耗时好空间。
-组合索引：为了更多的提高mysql效率可建立组合索引，遵循”最左前缀“原则。
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-什么是视图
+	
+什么是视图:
       视图是一种虚拟存在的表,对于使用使徒的用户来说基本上是透明的.视图并不在数据库中实际存在,行和列数据来自定义视图的查询中使用的表,并且是在使用视图时动态生成.
 视图相对于普通表优势:
        简单 :使用视图的用户完全不需要关心后面对应的表结构,关联条件和筛选条件.对用户来说已经是过滤好的复合条件的结果集
        安全 :使用视图的用户只能访问他们被允许查询的结果,对标的权限并不能限制到某个行某个列,但是通过视图就可以.
        数据独立:一旦视图的结构确定了,可以屏蔽表结构变化对用户的影响,原表增加列对视图没有影响原表修改列名,则可以通过修改视图来解决,对方问者不会产生影响
+
 什么是存储过程核函数:
       存储过程和函数是事先经过编译并储存在数据库中的一点sql语句的集合,调用存储过程和函数可以简化应用开发人员的额很多工作,减少数据在数据库和用用服务器之间的传输.
 提高数据处理效率有好处
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-SQL标准定义了4类隔离级别，包括了一些具体规则，用来限定事务内外的哪些改变是可见的，哪些是不可见的。低级别的隔离级一般支持更高的并发处理，并拥有更低的系统开销。
-Read Uncommitted（读取未提交内容）
+SQL隔离级别:
+SQL标准定义了4类隔离级别，包括了一些具体规则，用来限定事务内外的哪些改变是可见的，哪些是不可见的。
+低级别的隔离级一般支持更高的并发处理，并拥有更低的系统开销。
 
-       在该隔离级别，所有事务都可以看到其他未提交事务的执行结果。本隔离级别很少用于实际应用，因为它的性能也不比其他级别好多少。读取未提交的数据，也被称之为脏读（Dirty Read）。
-Read Committed（读取提交内容）
+Read Uncommitted（读取未提交内容）:
+    所有事物头可以看见其他未提交事物的数据 被称之为脏读(例:某个事务来更新一个数据,另一个事务在查询同一份数据,这时更新回滚,则后一个事务读取的数据就是错误数据)
+Read Committed（读取提交内容）:
+	一个事务只能看见已提交事务所做的改变,但是同一个事务查询时可能有其他事物commit所以可能查询结果不同(在一个事务的两次查询之中数据不一致，这可能是两次查询过
+	程中间插入了一个事务更新的原有的数据。)
+Repeatable Read（可重读）:
+    这是MySQL的默认事务隔离级别，它确保同一事务的多个实例在并发读取数据时，会看到同样的数据行。不过理论上，这会导致另一个棘手的问题：幻读 （Phantom Read）。
+	简单的说，幻读指当用户读取某一范围的数据行时，另一个事务又在该范围内插入了新行，当用户再读取该范围的数据行时，会发现有新的“幻影” 行。
+	InnoDB和Falcon存储引擎通过多版本并发控制（MVCC，Multiversion Concurrency Control）机制解决了该问题。
 
-       这是大多数数据库系统的默认隔离级别（但不是MySQL默认的）。它满足了隔离的简单定义：一个事务只能看见已经提交事务所做的改变。这种隔离级别 也支持所谓的不可重复读
-	（Nonrepeatable Read），因为同一事务的其他实例在该实例处理其间可能会有新的commit，所以同一select可能返回不同结果。
-Repeatable Read（可重读）
-
-       这是MySQL的默认事务隔离级别，它确保同一事务的多个实例在并发读取数据时，会看到同样的数据行。不过理论上，这会导致另一个棘手的问题：幻读 （Phantom Read）。
- 简单的说，幻读指当用户读取某一范围的数据行时，另一个事务又在该范围内插入了新行，当用户再读取该范围的数据行时，会发现有新的“幻影” 行。
-InnoDB和Falcon存储引擎通过多版本并发控制（MVCC，Multiversion Concurrency Control）机制解决了该问题。
-
-Serializable（可串行化） 
+Serializable（可串行化）:
        这是最高的隔离级别，它通过强制事务排序，使之不可能相互冲突，从而解决幻读问题。简言之，它是在每个读的数据行上加上共享锁。在这个级别，可能导致大量的超时现象和锁竞争。
-       只要操作产生了锁，就不允许其他事务读取和修改！
-         这四种隔离级别采取不同的锁类型来实现，若读取的是同一个数据的话，就容易发生问题。例如：
-         脏读(Drity Read)：某个事务已更新一份数据，另一个事务在此时读取了同一份数据，由于某些原因，前一个RollBack了操作，则后一个事务所读取的数据就会是不正确的。
-         不可重复读(Non-repeatable read):在一个事务的两次查询之中数据不一致，这可能是两次查询过程中间插入了一个事务更新的原有的数据。
-         幻读(Phantom Read):在一个事务的两次查询中数据笔数不一致，例如有一个事务查询了几列(Row)数据，而另一个事务却在此时插入了新的几列数据，先前的事务在接下来的查询中，
-         就会发现有几列数据是它先前所没有的。
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 
+只要操作产生了锁，就不允许其他事务读取和修改！
+
 脏读 :一个事务读到了另一个事务的未提交的数据 
-
 不可重复读 :一个事务读到了另一个事务已经提交的 update 的数据导致多次查询结果不一致. 
-
 虚幻读 :一个事务读到了另一个事务已经提交的 insert 的数据导致多次查询结果不一致.
 
-
-解决读问题:
- 
-未提交读（read uncommited） :脏读，不可重复读，虚读都有可能发生
-
-已提交读 （read commited）:避免脏读。但是不可重复读和虚读有可能发生 
-
-可重复读 （repeatable read） :避免脏读和不可重复读.但是虚读有可能发生. 
-
-串行化的 （serializable） :避免以上所有读问题. 
-Mysql 默认:可重复读 
-Oracle 默认:读已提交
-
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 事务特性（4种）: 
-
 原子性 （atomicity）:强调事务的不可分割. 
-
 一致性 （consistency）:事务的执行的前后数据的完整性保持一致. 
-
 隔离性 （isolation）:一个事务执行的过程中,不应该受到其他事务的干扰 
-
 持久性（durability） :事务一旦结束,数据就持久到数据库
 
-如果不考虑隔离性引发安全性问题:
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+二)sql 优化 
+1.添加PRIMARY KEY（主键索引） 
+mysql>ALTER TABLE `table_name` ADD PRIMARY KEY ( `column` ) 
+2.添加UNIQUE(唯一索引) 
+mysql>ALTER TABLE `table_name` ADD UNIQUE ( `column` ) 
+3.添加INDEX(普通索引) 
+mysql>ALTER TABLE `table_name` ADD INDEX index_name ( `column` ) 
+4.添加FULLTEXT(全文索引) 
+mysql>ALTER TABLE `table_name` ADD FULLTEXT ( `column`) 
+5.添加多列索引 
+mysql>ALTER TABLE `table_name` ADD INDEX index_name ( `column1`, `column2`, `column3` )
+6.mysql创建索引的时候指定索引长度
+CREATE INDEX index_name ON table_name (column_name(length), clolumn_name(length)…)；
 
-sql 优化 
 通过show status like 'Com_%' 显示当前session中所有统计参数的值
 定位执行效率低的sql   
 通过explain 分析低效sql
@@ -122,17 +93,6 @@ explain extended 命令 ,
 SHOW WARNINGS 查看mysql优化器对sql做了哪些优化
 使用过程  explain extended +sql ; SHOW WARNINGS  ;(Navicat for MySQL 无法查看结果)
 
-
-
-
-通过 show profile 分析sql
-
-select @@have_filing  查看当前数据库是否支持
-默认profiling 是关闭的 可以通过 set语句session 级别开启profiling
-SHOW VARIABLES LIKE 'profil%'
-SET profiling=ON;
-SHOW PROFILE FOR QUERY 228 查看 耗时 问题
-
 mysql 中能使用索引的经典场景
 1)匹配全职
 2)匹配指的范围查询
@@ -150,137 +110,115 @@ mysql 中存在索引但不能使用索引的场景
 5)用or分割开的条件,如果or前面的条件中的列有索引,而后面的列没有索引,那么涉及的索引都不会被使用
 因为or后面没有索引所以就没必要多一次索引扫描
 
-定期分析表和检查表
-分析表的语法如下:
-ANALYZE TABLE  table_name
 
+定期分析表和检查表分析表的语法如下:
+通过Analyze Table语句来修复索引
+ANALYZE TABLE table_name
 OPTIMIZE TABLE table_name  如果一个表经常修改 则可以使用  OPTIMIZE TABLE 命令来进行表优化 , 这个命令可以将表的空间碎片进行合并 并且可以消除由于删除
 或者更新造成的空间浪费 但是 它 只对Myisam ,bdb 和 innodb 表起作用
 
-优化insert 
-如果同时插入多行建议尽量使用多个值的 语句 这种方式大大降低客户端与数据库之间的链接关闭等消耗
-如果从不同的客户插入很多行 可以使用 insert delayed 语句得到更高的速度 delayed  的含义是 让insert 马上执行 其实数据都被放到内存中并没有写入到磁盘
-当 从 一个文本文件中装载一个 ,使用load data infile 通常比 insert 快 20 倍
+insert优化:
+如果同时插入多行建议尽量使用多个值的语句（批量插入）这种方式大大降低客户端与数据库之间的链接关闭等消耗
+如果从不同的客户插入很多行可以使用insert delayed语句得到更高的速度(delayed的含义是让insert马上执行其实数据都被放到内存中并没有写入到磁盘)
+当从一个文本文件中装载一个 ,使用load data infile 通常比 insert 快 20 倍
 
-优化 order by 
+order by优化: 
 mysq中有2种排序方式
 第一种通过有序索引顺序扫描直接返回有序数据 
 第二种是通过返回数据进行排序,也就是通常说的filesort排序,所有不是通过说因直接返回结果的排序都叫filesort. filesort 并不代表通过磁盘文件进行排序
 filesort 是通过相应的算法排序,将取得的数据在sort_buffer_size系统变量设置的内存排序区进行排序,如果装载不下就会在磁盘上进行数据进行分块分别排序然后将各块合并
- sort_buffer_size是每个线程独占的
-了解mysql排序方式 : 尽量减少额外的排序,通过索引直接返回有序数据,where条件和order by 使用相同的索引,并且 order by的顺序和索引顺序相同并且 orderby\ 字段都是生序或者降序
+sort_buffer_size是每个线程独占的
+了解mysql排序方式 : 尽量减少额外的排序,通过索引直接返回有序数据,where条件和order by 使用相同的索引,并且 order by的顺序和索引顺序相同并且 orderby字段都是生序或者降序
 
-优化group by 
+group by优化:
 如果查询包含order by 单用户想要避免排序结果的消耗 则可以指定order by null 禁止排序 
+mysql group by的with rollup用于分组统计不能和order by一起用(互斥)
 
 优化嵌套查询
 子查询可以被更有效的链接(join)代替
 因为mysql不需要在内存中创建临时表来完成这个逻辑上需要两个步骤的查询工作
 
 mysql如何优化 or 条件
-对含有or的查询子句 如果要利用索引 ,则or之间的每个 条件都必须要用到索引,没有索引考虑增加
+对含有or的查询子句 如果要利用索引 ,则or之间的每个条件都必须要用到索引,没有索引考虑增加
 
-mysql group by 的 with rollup 用于分组统计 不能 和 order by 一起用(互斥)
-
-
-
-MySQL 体系结构
-默认情况下 mysql 有7组线程 分别是 1个主线程 4组 io 线程1 个锁线程 求个 错误监控线程 purge线程
-
-master thread : 主要负责将脏数据缓存页 刷新导数据文件执行purge操作 触发检查点,合并插入缓冲区
-insert buffer thread: 主要负责插入缓冲去的合并
-read thread : 负责数据库读取操作 可配置多个读线程
-write thread :负责数据库写操作可配置多个写线程
-log thread : 用于将从做日志刷新到logfile中.
-purge thread: mysql5.5 之后用单独的 线程执行purge操作
-错误监控线程 : 主要负责错误监控和错误处理.
-show engine innodb status 命令查看这些线程状态(只能在mysql客户端用)
-
-mysql 内存优化管理及优化
+三)mysql内存优化管理及优化
 内存优化原则:
-将尽量多的内存分配给mysql做缓存,但要给操作系统和其他程勋的运行预留足够的内存,否则产生swap页交换,将严重影响系统性能
+将尽量多的内存分配给mysql做缓存,但要给操作系统和其他程序的运行预留足够的内存,否则产生swap页交换,将严重影响系统性能
 myisam的数据文件读取主要依赖系统io缓存,如果有myisam表就要预留更多的内存给操作系统做io缓存
 排序区,链接区等缓存是分配给每个数据库会话(session)专用,其默认值的设置要根据最大链接数配合,如果设置过大,不但浪费内存资源,而且
 在并发链接较高时会导致物理内存耗尽
 
-
+参数设置:
 MyISAM 内存优化
-key_buffer_siz 设置
-决定myisam索引块缓存区大小,他直接影响myisam标的存取效率. 可以在配置文件配置 建议至少分配1/4可用内存
-使用多个索引缓存
-mysql通过各session 共享的key buffer 提高了myisam索引存取的性能,但是不能消除session对key buff的竞争.
-为减少session 间对key buffer 的竞争 可引入了多索引缓存的机制,从而可以将不同表的索引缓存到不同key buffer
-创建 新的 key buffer 
-set global hot_cache.key_buffer_size=128*1024
-hot_cache 是 新建索引缓存的名称 ,global 关键字表示新建的缓存对每一个新的链接都有效.
-创建的索引缓存 删除key buffer 
-set global hot_cache.key_buffer_size=0;
-但是不能删除默认的key_buffer(查询 show variables like 'key_buffer_size' ;)
+key_buffer_siz:
+	决定myisam索引块缓存区大小,他直接影响myisam标的存取效率. 可以在配置文件配置 建议至少分配1/4可用内存
+	注:mysql会通过session共享的key buffer 来提高myisam索引获取的性能,但是会出现session对key_buffer竞争,可引用多索引缓存机制减少竞争,从而将不同表索引缓存到不同的key_buffer
+	创建新的key_buffer : set global hot_cache.key_buffer_size=128*1024
+	hot_cache是新建索引缓存的名称,global 关键字表示新建的缓存对每一个新的链接都有效.
+	删除key_buffer: set global hot_cache.key_buffer_size=0;
+	更常见的做法是通过配置文件在mysql启动时自动创建并加载索引缓存:
+	key_buff_size=4G
+	hot_cache.key_buff_size=2G
+	cold_cache.key_buff_size=1G
+	init_file=/www/.../mysqld_init.sql
+	在mysqld_init.sql中,可以通过cache index 命令分配索引缓存, 并用load index init cache 命令来进行索引预加载:
+	cache index sales(表) in hot_cache;
+	cache index sales2(表) in cold_cache;
+	load index into cache sales,sales2;
 
-更常见的做法是通过配置文件在mysql启动时自动创建并加载索引缓存:
-key_buff_size=4G
-hot_cache.key_buff_size=2G
-cold_cache.key_buff_size=1G
-init_file=/www/.../mysqld_init.sql
-
-在mysqld_init.sql中,可以通过cache index 命令分配索引缓存, 并用load index init cache 命令来进行索引预加载:
-cache index sales(表) in hot_cache;
-cache index sales2(表) in cold_cache;
-load index into cache sales,sales2;
-
-
-中点插入策略
-所谓"中点插入策略",是对LRU淘汰算法的改进,它将LRU链分成两部分:hot子表和warm子表,当一个索引块读入内存时,先被放到LRU链表的"中点",
-即warm子表的尾部,当达到一定命中次数后,该索引块会被晋升到hot子表的尾部;此后,该数据块在hot子表流转,如果其到达hot子表的头部并超过
-一定时间,他将由hot子表头部降级到warm子表头部;当需要淘汰索引快时,缓存管理程序会选择优先淘汰warm表头部的内存块
-
-可以通过 key_cache_division_limit 来控制大比例的缓存用作warm子表,key_cache_division_limit的默认值是100,意思是全部缓存都放到
-warm子表其实其实也就是不起用"中点插入策略"如果希望用30%的缓存用来cache最热的索引快,可以对key_cache_division_limit做如下设置
+中点插入策略key_cache_division_limit:
+所谓"中点插入策略",是对LRU淘汰算法的改进,它将LRU链分成两部分:hot子表和warm子表,当一个索引块读入内存时,先被放到LRU链表的"中点",即warm子表的尾部,当达到一定命中次数后,
+该索引块会被晋升到hot子表的尾部;此后,该数据块在hot子表流转,如果其到达hot子表的头部并超过.一定时间,他将由hot子表头部降级到warm子表头部;当需要淘汰索引快时,
+缓存管理程序会选择优先淘汰warm表头部的内存块,可以通过 key_cache_division_limit 来控制大比例的缓存用作warm子表,key_cache_division_limit的默认值是100,意思是全部缓存都放到
+warm子表其实其实也就是不起用."中点插入策略"是希望用30%的缓存用来cache最热的索引快,可以对key_cache_division_limit做如下设置
 set global key_cache_division_limit = 70
 set global hot_cache.key_cache_division_limit = 70
 
-除调节warm 走标配的比例外,还可以通过key_cache_age_threshold控制数据块由hot子表向warm子表降级的时间,值越小,数据块将越快被降级.
+key_cache_age_threshold:
+除调节warm走标配的比例外,还可以通过key_cache_age_threshold控制数据块由hot子表向warm子表降级的时间,值越小,数据块将越快被降级.
 对于有N个块的索引缓存来说,如果一个在hot子表头部的索引块,在最后 N X key_cache_age_threshold/100 次缓存命准内未被访问过,就会被降级到warm子表.
 
-调整read_buffer_size 和read_rnd_buffer_size
-如果顺序扫描myISAM表,可以增大 read_buffer_size 改善性能 但是 它是每个session独占,默认值太大,就会造成内存浪费.
-myISAM表 如果带有order by 子句的sql ,适当增大read_rnd_buffer_size但是 它是每个session独占,默认值太大,就会造成内存浪费.
+read_buffer_size:
+如果顺序扫描myISAM表,可以增大read_buffer_size改善性能但是它是每个session独占,默认值太大,就会造成内存浪费.
+
+read_rnd_buffer_size:
+myISAM表如果带有order by子句的sql ,适当增大read_rnd_buffer_size，但是它是每个session独占,默认值太大,就会造成内存浪费
 
 InnoDB 缓存机制
-
-innodb 用 一块内存区做IO 缓存池,该缓存池用来做InnoD的索引块和数据块这一点与myisam不同
-内部 innodb 缓存池逻辑上分 free list ,flush list 和LRU list组成  LRU list 是 innodb 也是用的缓存块 他是 innodb buffer pool 的核心
-
-Inoodb 使用的LRU 原理:
-将 LRU list 分为 young sublist 和 old sublist ,数据从磁盘读入时,会将该缓存块插入到LRU list 的"中点",即 old sublist 的头部;讲过一定时间的访问
+innodb用一块内存区做IO缓存池,该缓存池用来做InnoD的索引块和数据块这一点与myisam不同
+Inoodb使用的LRU原理:
+将LRU list分为young sublist和old sublist ,数据从磁盘读入时,会将该缓存块插入到LRU list 的"中点",即 old sublist 的头部;经过一定时间的访问
 (由 innodb_old_blocks_time 系统参数决定),改数据块将会由old sublist 转移到 young sublist的头部,也就是整个LRU list 的头部;
 随着时间的推移,young sublist 和 old sublist中较少的被访问的缓存块将从各自链表的头部逐渐向尾部移动;需要淘汰数据块时,优先从尾部淘汰.
 
-innodb_buffer_pool_size设置:
-innodb_buffer_pool_size决定innodb 存储引擎表数据和索引数据的最大缓存区大小.innodb_buffer_pool 同时为数据块和索引块提供数据缓存
-innodb_buffer_pool_size值越大,缓存命中率越高,访问InnoDB表需要的磁盘io越少.性能就越高.在一个专用数据库服务器上可以将80%的物理内存分配给innodb_buffer_pool
-innodb_old_blocks_time 的设置 参数决定了缓存数据块由old sublist 转移到 young sublist的快慢  当一个 数据块被插入到old sublist 后 至少要停留 innodb_old_blocks_time(毫秒)
-才有被转移到new sublist .
+innodb_buffer_pool_size设置
+innodb_buffer_pool_size决定innodb存储引擎表数据和索引数据的最大缓存区大小,值越大,缓存命中率越高,访问InnoDB表需要的磁盘io越少,性能就越高.innodb_buffer_pool
+同时为数据块和索引块提供数据缓存,在一个专用数据库服务器上可以将80%的物理内存分配给innodb_buffer_pool
 
-调整缓存池数量,减少内部对缓存池数据结构的挣用:
-mysql内部不同的线程对innodb缓存池在某些时候会出现互斥挣用,会产生性能问题,尤其在高并发和buffer pool 较大情况下 innodb 引入 innodb_buffer_pool_instances 解决这个问题
-innodb 缓存系统会将 innodb_buffer_pool_size 制定大小的缓存评分成innodb_buffer_pool_instances个buffer pool
+innodb_old_blocks_time:
+参数决定了缓存数据块由old sublist转移到young sublist的快慢,当一个数据块被插入到old sublist后至少要停留innodb_old_blocks_time(毫秒)才有被转移到new sublist .
 
-控制 innodb buffer 刷新,延长数据缓存时间 减缓磁盘io
-在innodb 找不到干净的可用缓存页或检查点被触发等情况下,innodb 的后台线程就会开始吧"脏的缓存页"回写到磁盘中,这个过程叫缓存刷新.
-innodb buffer pool 刷新的快慢取决于2个参数:
-	innodb_max_dirty_pages_pct ,主要控制缓存池中脏页的最大比例,默认75%如果脏页的数量达到或超过该值InnoDB的后台线程就会开启缓存刷新
-	innodb_io_capacity 代表磁盘系统io能力一定程度上表示磁盘每秒可完成io次数,默认200 对于转数较低的磁盘,如7200RPM的磁盘可将值调整到100
-		对于高性能的磁盘可以增大
-innodb 双写策略
-为了解决当mysql服务器发生断电宕机等情况出现数据无法恢复的问题
-innodb doublewrite 机制原理:用系统表空间中的一块连续磁盘空间(100个连续数据页,大小2MB)作为doublewrite buffer, 当进行脏页刷新时,首先将脏页的副本写到系统标的doublewrite buffer
-中,然后调用fsync()刷新操作系统io缓存,确保副本被真正写如磁盘,最后innodb后台io线程将脏页刷新到此案数据文件.
+innodb_buffer_pool_instances:
+在高并发和buffer pool较大情况下,mysql内部会对innodb缓存池在某些时候会出现互斥挣用,会产生性能问题.
+innodb缓存系统会将innodb_buffer_pool_size制定大小的缓存评分成innodb_buffer_pool_instances个buffer pool来解决这个问题
 
-调整用户线程服务排序缓存区
-show global status 看到 sort_merge_passes 值很大,可以考虑增加sort_buffer_size 的值增大排序缓冲区 改善带有order by 子句或group子句性能
+控制innodb buffer刷新,延长数据缓存时间减缓磁盘io:在innodb找不到干净的可用缓存页或检查点被触发等情况下,innodb 的后台线程就会开始吧"脏的缓存页"回写到磁盘中,这个过程叫缓存刷新.
+innodb_max_dirty_pages_pct:主要控制缓存池中脏页的最大比例,默认75%如果脏页的数量达到或超过该值InnoDB的后台线程就会开启缓存刷新
+innodb_io_capacity:代表磁盘系统io能力一定程度上表示磁盘每秒可完成io次数,默认200 对于转数较低的磁盘,如7200RPM的磁盘可将值调整到100,对于高性能的磁盘可以增大
+
+innodb 双写策略:是为了解决当mysql服务器发生断电宕机等情况出现数据无法恢复的问题
+nnodb doublewrite 机制原理:
+用系统表空间中的一块连续磁盘空间(100个连续数据页,大小2MB)作为doublewrite buffer, 当进行脏页刷新时,首先将脏页的副本写到系统标的doublewrite buffer
+中,然后调用fsync()刷新操作系统io缓存,确保副本被真正写如磁盘,最后innodb后台io线程将脏页刷新到此数据文件.
+
+sort_buffer_size:
+增大排序缓冲区改善带有order by子句或group子句性能(show global status 看到 sort_merge_passes 值很大时)
+
+join_buffer_size:
 对于无法通过索引进行连接查询的操作可以增加 join_buffer_size 的值来改善性能
 
+
+四)mysql日志优化:
 redo log 是保证事务acid的重要机制
 数据更新 innodb 内部流程:
 1)将数据读入innodb buffer pool ,并对相关记录加独占锁.
@@ -310,69 +248,3 @@ thread_cache_size:
 控制mysql缓存客户服务线程数量
 innodb_lock_wait_timeout: 
 控制innodb事务等待行锁的时间默认50ms,超过这个时间还未分配到资源则会返回应用失败
-
-
-
-1.添加PRIMARY KEY（主键索引） 
-mysql>ALTER TABLE `table_name` ADD PRIMARY KEY ( `column` ) 
-2.添加UNIQUE(唯一索引) 
-mysql>ALTER TABLE `table_name` ADD UNIQUE ( `column` ) 
-3.添加INDEX(普通索引) 
-mysql>ALTER TABLE `table_name` ADD INDEX index_name ( `column` ) 
-4.添加FULLTEXT(全文索引) 
-mysql>ALTER TABLE `table_name` ADD FULLTEXT ( `column`) 
-5.添加多列索引 
-mysql>ALTER TABLE `table_name` ADD INDEX index_name ( `column1`, `column2`, `column3` )
-6.mysql创建索引的时候指定索引长度
-CREATE INDEX index_name ON table_name (column_name(length), clolumn_name(length)…)；
----------------------------------------------------------------mysql整理-----------------------------------------------------------------------------------------------------
-一) 基础知识:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

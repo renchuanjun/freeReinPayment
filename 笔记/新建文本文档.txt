@@ -117,8 +117,9 @@ PROPAGATION_NEVER 以非事务方式运行，如果有事务存在，抛出异常
 
 熟练掌握java集合框架,mysql以及sql 优化
 
-掌握 redis, mycat  
-熟练应用 spring boot ,spring cloud ,Spring  springMVC  mybatis 进行相关开发
+掌握 redis, mycat 
+ 
+熟练应用 spring boot ,spring cloud ,Spring  springMVC mybatis 进行相关开发
 熟悉多线程  nginx 和https相关配置
 能使用JQuery ，js， freemarker ,CSS  bootstrap 前端开发
 熟练运用SVN Git Maven管理工具对项目进行搭建和部署,熟练应用  PowerDesigner进行数据库建模

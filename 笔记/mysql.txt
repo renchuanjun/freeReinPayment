@@ -93,6 +93,14 @@ explain extended ÃüÁî ,
 SHOW WARNINGS ²é¿´mysqlÓÅ»¯Æ÷¶Ôsql×öÁËÄÄĞ©ÓÅ»¯
 Ê¹ÓÃ¹ı³Ì  explain extended +sql ; SHOW WARNINGS  ;(Navicat for MySQL ÎŞ·¨²é¿´½á¹û)
 
+Í¨¹ı  show profiles ·ÖÎösql
+select @@have_filing  ²é¿´µ±Ç°Êı¾İ¿âÊÇ·ñÖ§³Ö
+Ä¬ÈÏprofiling ÊÇ¹Ø±ÕµÄ ¿ÉÒÔÍ¨¹ı setÓï¾äsession ¼¶±ğ¿ªÆôprofiling
+SHOW VARIABLES LIKE 'profil%'
+SET profiling=ON;
+SHOW PROFILE FOR QUERY (id) ²é¿´ ºÄÊ± ÎÊÌâ
+
+
 mysql ÖĞÄÜÊ¹ÓÃË÷ÒıµÄ¾­µä³¡¾°
 1)Æ¥ÅäÈ«Ö°
 2)Æ¥ÅäÖ¸µÄ·¶Î§²éÑ¯
@@ -150,7 +158,7 @@ myisamµÄÊı¾İÎÄ¼ş¶ÁÈ¡Ö÷ÒªÒÀÀµÏµÍ³io»º´æ,Èç¹ûÓĞmyisam±í¾ÍÒªÔ¤Áô¸ü¶àµÄÄÚ´æ¸ø²Ù×÷ÏµÍ
 
 ²ÎÊıÉèÖÃ:
 MyISAM ÄÚ´æÓÅ»¯
-key_buffer_siz:
+key_buffer_sizs:
 	¾ö¶¨myisamË÷Òı¿é»º´æÇø´óĞ¡,ËûÖ±½ÓÓ°Ïìmyisam±êµÄ´æÈ¡Ğ§ÂÊ. ¿ÉÒÔÔÚÅäÖÃÎÄ¼şÅäÖÃ ½¨ÒéÖÁÉÙ·ÖÅä1/4¿ÉÓÃÄÚ´æ
 	×¢:mysql»áÍ¨¹ısession¹²ÏíµÄkey buffer À´Ìá¸ßmyisamË÷Òı»ñÈ¡µÄĞÔÄÜ,µ«ÊÇ»á³öÏÖsession¶Ôkey_buffer¾ºÕù,¿ÉÒıÓÃ¶àË÷Òı»º´æ»úÖÆ¼õÉÙ¾ºÕù,´Ó¶ø½«²»Í¬±íË÷Òı»º´æµ½²»Í¬µÄkey_buffer
 	´´½¨ĞÂµÄkey_buffer : set global hot_cache.key_buffer_size=128*1024

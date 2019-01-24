@@ -68,9 +68,13 @@ hashmap 底层的数据结构为 实际一个 是node[]每个数组的位置上放置的node对象
 hashmap put()方法 流程：
 1)首先会判断Node<K,V>[] 是否为空 若为空直接初始化并赋值
 2)(p = tab[i = (n - 1) & hash]) == null 通过位运算判断当前节点是否为空 若为空直接赋值
-3)
-
-
+3)(p.hash == hash && ((k = p.key) == key || (key != null && key.equals(k)))) 获取当前建值对的hash值进行比较并且比较key的内存地址或者比较key的内容(通过equals)判断是否存在
+4)比较是否为TreeNode尽心红黑树添加
+5)最后通过无线循环遍历当前链表若Node节点的next为null在在链表底部添加一个节点并结束循环或者找到某个节点并从新赋值
+hashmap get()方法 流程：
+1)判空
+2)(first.hash == hash &&  ((k = first.key) == key || (key != null && key.equals(k)))) 通过判断首节点的hash值和比较key的内存地址或者比较key的内容(通过equals)判断是否存在
+3)获取当前首节点并进行遍历查找
 
  -- linkedhashmap
 linkedhashmap 的数据结构与hashmap 基本相同 只是 在 创建node 节点上增加了一个 Entry 数组

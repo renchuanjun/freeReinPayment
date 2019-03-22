@@ -5,7 +5,6 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class MD5Utils {

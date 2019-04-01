@@ -27,7 +27,7 @@ public class TaskServiceApp {
 
     public static void main(String[] args) throws Exception {
         SpringApplicationBuilder builder = new SpringApplicationBuilder(TaskServiceApp.class);
-        builder.listeners(new MyApplicationEnvironmentPreparedEventListener());
+//        builder.listeners(new MyApplicationEnvironmentPreparedEventListener());
         builder.web(true).run(args);
     }
     /***
